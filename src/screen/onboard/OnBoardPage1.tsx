@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
-const OnBoardPage1 = () => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+const OnBoardPage1 = ({ navigation }: {navigation: any}) => {
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.checkBoxView}>
         <CheckBox
           disabled={false}
           value={toggleCheckBox}
+          style={styles.checkBoxToggle}
           onValueChange={(newValue) => setToggleCheckBox(newValue)}
         />
         <Text
@@ -23,12 +25,16 @@ const OnBoardPage1 = () => {
           체크하시면서 진행해주세요.
         </Text>
       </View>
-      <View>
-        <Text>
-          넘어가기
-        </Text>
-        <View>
-          <Text>다음</Text>
+      <View style={styles.bottomView}>
+        <TouchableOpacity>
+          <Text style={styles.bottomViewLeftTouchText}>
+            넘어가기
+          </Text>
+        </TouchableOpacity>
+        <View style={styles.bottomViewRightView}>
+          <TouchableOpacity onPress={() => navigation.navigate('OnBoardPage2')}>
+            <Text style={styles.bottomViewRightViewTouchText}>다음</Text>
+          </TouchableOpacity>
           {/*<Image style={styles.} source={require('')}/>*/}
         </View>
       </View>
@@ -63,6 +69,10 @@ const styles = StyleSheet.create({
     flexShrink: 1
   },
 
+  checkBoxToggle: {
+    flexShrink: 1
+  },
+
   checkBoxTextInfoView: {
 
   },
@@ -72,7 +82,14 @@ const styles = StyleSheet.create({
   },
 
   bottomView: {
-
+    position: 'absolute',
+    bottom: '5%',
+    width: '100%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
 
   bottomViewText: {
@@ -81,6 +98,18 @@ const styles = StyleSheet.create({
 
   bottomViewRightView: {
 
+  },
+
+  bottomViewLeftTouch: {
+
+  },
+
+  bottomViewLeftTouchText: {
+    color: '#3070D5'
+  },
+
+  bottomViewRightViewTouchText: {
+    color: '#3070D5'
   }
 
 });
