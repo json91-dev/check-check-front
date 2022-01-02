@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
 const OnBoardPage1 = ({ navigation }: {navigation: any}) => {
@@ -7,24 +7,29 @@ const OnBoardPage1 = ({ navigation }: {navigation: any}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.checkBoxView}>
-        <CheckBox
-          disabled={false}
-          value={toggleCheckBox}
-          style={styles.checkBoxToggle}
-          onValueChange={(newValue) => setToggleCheckBox(newValue)}
-        />
-        <Text
-          style={styles.checkBoxText}
-        >
-          세상의 모든 체크리스트, Check Check에 오신걸 환영합니다!
-        </Text>
+      <View style={styles.topView}>
+        <View style={styles.boardingImageView}>
+          <Image style={styles.boardingImage} source={require('../../assets/boarding_main.png')} />
+        </View>
+        <View style={styles.checkBoxView}>
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            style={styles.checkBoxToggle}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          />
+          <Text
+            style={styles.checkBoxText}
+          >
+            세상의 모든 체크리스트, Check Check에 오신걸 환영합니다!
+          </Text>
+        </View>
       </View>
-      <View style={styles.checkBoxTextInfoView}>
-        <Text style={styles.checkBoxTextInfo}>
-          체크하시면서 진행해주세요.
-        </Text>
-      </View>
+      {/*<View style={styles.checkBoxTextInfoView}>*/}
+        {/*<Text style={styles.checkBoxTextInfo}>*/}
+          {/*체크하시면서 진행해주세요.*/}
+        {/*</Text>*/}
+      {/*</View>*/}
       <View style={styles.bottomView}>
         <TouchableOpacity>
           <Text style={styles.bottomViewLeftTouchText}>
@@ -48,29 +53,27 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    borderWidth: 1,
-    borderColor: 'red',
+    backgroundColor: 'white'
   },
 
   checkBoxView: {
     width: '80%',
-    height: '50%',
     flexDirection: 'row',
-    alignItems: 'flex-end',
     justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: '10%',
     marginRight: '10%',
-    borderWidth: 1,
-    borderColor: 'blue',
+    marginTop: '5%',
   },
 
   checkBoxText: {
     width: '100%',
-    flexShrink: 1
+    flexShrink: 1,
+    marginLeft: 7
   },
 
   checkBoxToggle: {
-    flexShrink: 1
+    flexShrink: 1,
   },
 
   checkBoxTextInfoView: {
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     paddingRight: '5%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
 
   bottomViewText: {
@@ -110,6 +113,28 @@ const styles = StyleSheet.create({
 
   bottomViewRightViewTouchText: {
     color: '#3070D5'
-  }
+  },
 
+  boardingImageView: {
+    width: '80%',
+    height: '80%',
+  },
+
+  boardingImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+
+  topView: {
+    borderWidth: 1,
+    width: '80%',
+    height: '60%',
+    marginLeft: '10%',
+    marginTop: '5%',
+    justifyContent: 'center',
+    alignItems:'center',
+    borderColor: '#7199DF',
+    borderRadius: 6
+  }
 });

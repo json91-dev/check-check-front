@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const OnBoardPage3 = ({ navigation }: {navigation: any}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
       <View style={styles.bottomImageView}>
         <TouchableOpacity onPress={() => navigation.navigate('OnBoardLogin')}>
@@ -11,7 +11,7 @@ const OnBoardPage3 = ({ navigation }: {navigation: any}) => {
         </TouchableOpacity>
       </View>
 
-    </View>
+    </SafeAreaView>
   )
 };
 
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    backgroundColor: 'white'
   },
 
   bottomImageView : {
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
     height: '8%',
     justifyContent: 'center',
     alignItems: 'center',
-
   },
 
   bottomImage : {
