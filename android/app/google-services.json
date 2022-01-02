@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "758583185214",
+    "project_id": "check-check-2a42e",
+    "storage_bucket": "check-check-2a42e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758583185214:android:a29c3f70a5fd031d4ea66f",
+        "android_client_info": {
+          "package_name": "com.checkcheck2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758583185214-eohkgk3fnlamint93hpso4p5fisa9ehg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.checkcheck2",
+            "certificate_hash": "c4f5f6527858211dc5637038237bdd531468fa0f"
+          }
+        },
+        {
+          "client_id": "758583185214-vihmf7rtpffbe04i22dsa06fda16ks7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6sfBB_dK7ya32J61sU4S9fW3AnZ-FI20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758583185214-vihmf7rtpffbe04i22dsa06fda16ks7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
