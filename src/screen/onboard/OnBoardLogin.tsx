@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from "@react-native-google-signin/google-signin";
+import {KakaoOAuthToken, login, logout} from '@react-native-seoul/kakao-login';
 
 const OnBoardLogin = () => {
   const [loggedInGoogle, setLoggedInGoogle] = useState(false);
@@ -28,16 +29,23 @@ const OnBoardLogin = () => {
     });
   }, []);
 
-  async function onGoogleButtonPress() {
+  const onGoogleButtonPress = async () => {
     try {
       const { idToken } = await GoogleSignin.signIn();
-      console.log(idToken)
+      console.log(idToken);
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       return auth().signInWithCredential(googleCredential);
     } catch (e) {
       console.log(e);
     }
-  }
+  };
+
+  const onKakaoButtonPress = async () => {
+    const token: KakaoOAuthToken = await login();
+    console.log(JSON.stringify(token));
+    Alert.alert('카카오 로그인', '로그인 성공');
+    logout()
+  };
 
   /** Kakao **/
 
@@ -49,7 +57,7 @@ const OnBoardLogin = () => {
         <TouchableOpacity style={styles.bottomImageTouch}>
           <Image style={styles.bottomImage} source={require('../../assets/apple_login.png')}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.bottomImageTouch}>
+        <TouchableOpacity style={styles.bottomImageTouch} onPress={onKakaoButtonPress}>
           <Image style={styles.bottomImage} source={require('../../assets/kakao_login.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.bottomImageTouch} onPress={onGoogleButtonPress}>
