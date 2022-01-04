@@ -6,6 +6,7 @@ import {GoogleSignin} from "@react-native-google-signin/google-signin";
 const OnBoardLogin = () => {
   const [loggedInGoogle, setLoggedInGoogle] = useState(false);
 
+  /** Google **/
   useEffect(() => {
     setLoggedInGoogle(false);
 
@@ -27,8 +28,6 @@ const OnBoardLogin = () => {
     });
   }, []);
 
-
-
   async function onGoogleButtonPress() {
     try {
       const { idToken } = await GoogleSignin.signIn();
@@ -39,6 +38,9 @@ const OnBoardLogin = () => {
       console.log(e);
     }
   }
+
+  /** Kakao **/
+
 
 
   return (

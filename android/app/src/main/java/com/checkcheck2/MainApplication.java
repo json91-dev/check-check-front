@@ -1,4 +1,4 @@
-package com.checkcheck2;
+package com.checkcheck;
 
 import android.app.Application;
 import android.content.Context;

@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:758583185214:android:2194632db08ee9ab4ea66f",
+        "mobilesdk_app_id": "1:758583185214:android:6f69a9eb706fb10a4ea66f",
         "android_client_info": {
-          "package_name": "com.checkcheck2"
+          "package_name": "com.checkcheck"
         }
       },
       "oauth_client": [
         {
-          "client_id": "758583185214-eohkgk3fnlamint93hpso4p5fisa9ehg.apps.googleusercontent.com",
+          "client_id": "758583185214-u1la8je5knmevklcfgsb9s50d6gruo1a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.checkcheck2",
-            "certificate_hash": "c4f5f6527858211dc5637038237bdd531468fa0f"
+            "package_name": "com.checkcheck",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {
