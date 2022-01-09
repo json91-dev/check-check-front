@@ -44,7 +44,9 @@ const OnBoardLogin = () => {
     const token: KakaoOAuthToken = await login();
     console.log(JSON.stringify(token));
     Alert.alert('카카오 로그인', '로그인 성공');
-    logout()
+    logout();
+
+    return;
   };
 
   /** Kakao **/
