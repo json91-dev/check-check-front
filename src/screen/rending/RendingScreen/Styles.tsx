@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: 'white',
-    borderColor: 'red',
-    borderWidth: 1,
   },
 
   row: {
@@ -14,7 +12,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     height: '30%',
-  }
+    marginBottom: 10,
+  },
+
+  headerView: {
+    height: '10%',
+    paddingTop: 20,
+    paddingLeft: '10%',
+    paddingRight: '10%',
+  },
+
+  headerViewText: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold'
+  },
+
+  buttonView: {
+    height: '75%',
+    paddingLeft:'10%',
+    paddingRight: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  bottomView: {
+    height: '15%',
+    paddingLeft: '10%',
+    paddingRight: '10%',
+  },
+
+  bottomViewTouch: {
+
+  },
+
+  bottomViewImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
 });
 
 export default styles;
