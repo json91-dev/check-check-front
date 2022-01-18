@@ -10,7 +10,7 @@
 
 import React from 'react';
 import {Text} from 'react-native';
-import Root from './screen/RootNavigator';
+import Root from './screens/RootNavigator';
 
 const App = () => {
   return (
