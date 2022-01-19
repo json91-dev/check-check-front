@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoardStackNavigator from './onboard/OnBoardStackNavigator'
 import RendingStackNavigator from './rending/RendingStackNavigator';
+
 // import TestStackNavigator from './test/TestStackNavigator';
 
 const Stack = createNativeStackNavigator();
@@ -23,12 +24,13 @@ function App() {
           options={{ headerShown: false}}  />
 
         {/*<Stack.Screen*/}
-          {/*name="Test"*/}
-          {/*component={TestStackNavigator}*/}
-          {/*options={{ headerShown: false}}  />*/}
+        {/*name="Test"*/}
+        {/*component={TestStackNavigator}*/}
+        {/*options={{ headerShown: false}}  />*/}
 
       </Stack.Navigator>
     </NavigationContainer>
+
 );
 }
 

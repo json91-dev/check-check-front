@@ -4,7 +4,7 @@ import RendingPage from "./TestScreen";
 
 const Stack = createNativeStackNavigator();
 
-function TestStackNavigator () {
+const TestStackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName = "TestScreen"

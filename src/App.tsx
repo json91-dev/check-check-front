@@ -9,12 +9,16 @@
  */
 
 import React from 'react';
-import {Text} from 'react-native';
 import Root from './screens/RootNavigator';
+import { QueryClientProvider ,QueryClient} from "react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <Root/>
+    <QueryClientProvider client={queryClient}>
+      <Root/>
+    </QueryClientProvider>
   );
 };
 

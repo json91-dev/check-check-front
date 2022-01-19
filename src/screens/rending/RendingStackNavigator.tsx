@@ -4,7 +4,7 @@ import RendingScreen from "./RendingScreen/RendingScreen";
 
 const Stack = createNativeStackNavigator();
 
-function RendingStackNavigator () {
+const RendingStackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName = "RendingScreen"

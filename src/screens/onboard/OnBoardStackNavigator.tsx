@@ -7,7 +7,7 @@ import OnBoardLogin from './OnBoardLogin';
 
 const Stack = createNativeStackNavigator();
 
-function OnBoardStackNavigator () {
+const OnBoardStackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName = "MapScreen"
