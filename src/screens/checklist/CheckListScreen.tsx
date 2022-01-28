@@ -1,6 +1,6 @@
 import React from 'react'
 import {ActivityIndicator, Text, View} from "react-native";
-import {useCheckList} from "@/query/checklist/useCheckList";
+import {useCheckList} from "../../query/checklist/useCheckList";
 
 const CheckListScreen = () => {
   const {status, data, error} = useCheckList;

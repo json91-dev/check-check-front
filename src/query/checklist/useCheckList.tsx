@@ -7,7 +7,7 @@ const dummyData = {
 
 const getCheckList = async (): Promise<Array<string>> => {
   const { data } = await axios.get(
-    'http://localhost:8080/api/v1/user/checklist?email=wsnam0507@gmail.com&subjectId=61d9d5b491ed4c53c0b6b5a5',
+    'http://158.247.192.7:8080/api/v1/checklist?subjectTitle=전세 계약!!',
   );
   return data;
 };

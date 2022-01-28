@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import CheckListScreen from './CheckListScreen/CheckListScreen';
+import CheckListScreen from './CheckListScreen';
 
 const Stack = createNativeStackNavigator();
 

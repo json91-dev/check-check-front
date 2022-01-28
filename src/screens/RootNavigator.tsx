@@ -4,7 +4,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoardStackNavigator from './onboard/OnBoardStackNavigator'
-import RendingStackNavigator from './rending/RendingStackNavigator';
+import MainStackNavigator from "./main/MainStackNavigator";
 
 // import TestStackNavigator from './test/TestStackNavigator';
 
@@ -20,7 +20,7 @@ function App() {
           options={{ headerShown: false}}  />
         <Stack.Screen
           name="Rending"
-          component={RendingStackNavigator}
+          component={MainStackNavigator}
           options={{ headerShown: false}}  />
 
         {/*<Stack.Screen*/}

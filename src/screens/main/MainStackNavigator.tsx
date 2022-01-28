@@ -1,10 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import RendingScreen from "./RendingScreen/RendingScreen";
+import RendingScreen from "./RendingScreen";
 
 const Stack = createNativeStackNavigator();
 
-const RendingStackNavigator = () => {
+const MainStackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName = "RendingScreen"
@@ -14,4 +14,4 @@ const RendingStackNavigator = () => {
   );
 }
 
-export default RendingStackNavigator;
+export default MainStackNavigator;
