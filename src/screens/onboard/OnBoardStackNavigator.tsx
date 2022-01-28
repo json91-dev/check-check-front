@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import OnBoardPage1 from './OnBoardPage1';
-import OnBoardPage2 from './OnBoardPage2';
-import OnBoardPage3 from './OnBoardPage3';
-import OnBoardLogin from './OnBoardLogin';
+import OnBoardPage1 from './OnBoardPage1/OnBoardPage1';
+import OnBoardPage2 from './OnBoardPage2/OnBoardPage2';
+import OnBoardPage3 from './OnBoardPage3/OnBoardPage3';
+import OnBoardLogin from './OnBoardLogin/OnBoardLogin';
 
 const Stack = createNativeStackNavigator();
 

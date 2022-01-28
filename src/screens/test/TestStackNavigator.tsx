@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import RendingPage from "./TestScreen";
+import RendingPage from "./TestScreen/TestScreen";
 
 const Stack = createNativeStackNavigator();
 

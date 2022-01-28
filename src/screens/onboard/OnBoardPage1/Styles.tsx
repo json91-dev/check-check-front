@@ -1,16 +1,4 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-
-const RendingPage = ({ navigation }: {navigation: any}) => {
-
-  return (
-    <SafeAreaView style={styles.container}>
-
-    </SafeAreaView>
-  )
-};
-
-export default RendingPage;
+import {StyleSheet} from "react-native"
 
 const styles = StyleSheet.create({
   container: {
@@ -101,3 +89,5 @@ const styles = StyleSheet.create({
     borderRadius: 6
   }
 });
+
+export default styles;
