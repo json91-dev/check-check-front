@@ -5,13 +5,24 @@ const dummyData = {
 
 };
 
-const getCheckList = async (): Promise<Array<string>> => {
-  const { data } = await axios.get(
+const getCheckList = ()=> {
+  return axios.get(
     'http://158.247.192.7:8080/api/v1/checklist?subjectTitle=전세 계약!!',
-  );
-  return data;
+  );;
 };
 
 export const useCheckList = () => {
-  return useQuery('posts', getCheckList);
+  const { data, isLoading, error, isFetching, status  } = useQuery('posts', getCheckList, {
+    staleTime: 6000000, // 100분
+    cacheTime: 6000000, // 100분
+    keepPreviousData: true,
+  });
+  console.log(data.data)
+
+  return {
+    checkList: data?.data,
+    isLoading,
+    status,
+    error
+  }
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {ActivityIndicator, Text, View} from "react-native";
-import Styles from './Styles';
+import styles from './Styles';
 
 interface LoadingProps{
   text?: string;
@@ -8,9 +8,11 @@ interface LoadingProps{
 
 const Loading = ({text} : LoadingProps) => {
   return (
-    <View style={Styles.container}>
-      <ActivityIndicator/>
-      {text? <Text>{text}</Text> : null}
+    <View style={styles.container}>
+      <ActivityIndicator size={30}/>
+      {text? <Text style={styles.text}>{text}</Text> : null}
     </View>
   )
-}
+};
+
+export default Loading

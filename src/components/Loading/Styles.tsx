@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  text: {
+    marginTop: 40,
+    color: 'black'
   }
 });
 

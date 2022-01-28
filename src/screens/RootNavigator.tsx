@@ -14,13 +14,13 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Rending">
+      <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
           name="Home"
           component={OnBoardStackNavigator}
           options={{ headerShown: false}}  />
         <Stack.Screen
-          name="Rending"
+          name="Main"
           component={MainStackNavigator}
           options={{ headerShown: false}}  />
 

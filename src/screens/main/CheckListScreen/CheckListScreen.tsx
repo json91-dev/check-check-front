@@ -1,28 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {ActivityIndicator, Text, View} from "react-native";
 import {useCheckList} from "../../../query/checklist/useCheckList";
+import Loading from "../../../components/Loading/Loading"
 import styles from './Styles';
 
 const CheckListScreen = () => {
-  const {status, data, error} = useCheckList;
+  const {checkList, status, error} = useCheckList();
 
-  switch (status) {
-    case 'loading': {
-      return <ActivityIndicator/>
-    }
-
-    case 'error': {
-      return <View><Text>에러</Text></View>
-    }
-
-    default: {
-      return (
-        <View>
-          <Text>성공</Text>
-        </View>
-      )
-    }
+  if (!checkList || status!== 'success') {
+    return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
   }
+
+  const { title, subTitle } = checkList;
+
+
+
+  return (
+    <View>
+      <Text>{subTitle}</Text>
+    </View>
+  )
 };
 
 export default CheckListScreen;
