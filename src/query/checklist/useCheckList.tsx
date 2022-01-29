@@ -5,19 +5,19 @@ const dummyData = {
 
 };
 
-const getCheckList = ()=> {
+const getCheckList = (subjectTitle) => () => {
   return axios.get(
-    'http://158.247.192.7:8080/api/v1/checklist?subjectTitle=전세 계약!!',
+    `http://158.247.192.7:8080/api/v1/checklist?subjectTitle=${subjectTitle}`,
   );;
 };
 
-export const useCheckList = () => {
-  const { data, isLoading, error, isFetching, status  } = useQuery('posts', getCheckList, {
+export const useCheckList = (subjectTitle) => {
+  const { data, isLoading, error, isFetching, status  } = useQuery('posts', getCheckList(subjectTitle), {
     staleTime: 6000000, // 100분
     cacheTime: 6000000, // 100분
     keepPreviousData: true,
   });
-  console.log(data.data)
+
 
   return {
     checkList: data?.data,
