@@ -35,7 +35,36 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 2,
     borderRadius: 5
+  },
+  titleImageView: {
+    width: '100%',
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+
+  titleImage: {
+    height: 100,
+    resizeMode: 'contain',
+  },
+
+  titleView: {
+    marginTop: 20,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  titleText: {
+    fontSize: 17,
+    color: 'black'
+  },
+
+  checkBoxToggle: {
+
   }
+
 });
 
 export default styles;

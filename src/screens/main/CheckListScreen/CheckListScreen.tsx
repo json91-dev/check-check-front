@@ -3,6 +3,7 @@ import {ActivityIndicator, Animated, Image, StyleSheet, Text, TouchableOpacity, 
 import {useCheckList} from "@query/checklist/useCheckList";
 import Loading from "@components/Loading/Loading"
 import styles from './Styles';
+import CheckBox from "@react-native-community/checkbox";
 
 const totalIndex = 7;
 const currentIndex = 0;
@@ -19,6 +20,7 @@ const CheckListScreen = () => {
 
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
+  const [checkBoxValues, setCheckBoxValues] = useState([false, false, false, false])
 
   const loaderValue = useRef(new Animated.Value(0)).current;
   const width = loaderValue.interpolate({
@@ -29,30 +31,43 @@ const CheckListScreen = () => {
 
 
   useEffect(() => {
-    countInterval.current = setInterval(() => setCount((old) => old + 5), 1000);
-    return () => {
-      clearInterval(countInterval.current as NodeJS.Timeout); //when user exits, clear this interval.
-    };
+    // countInterval.current = setInterval(() => setCount((old) => old + 5), 1000);
+    // return () => {
+    //   clearInterval(countInterval.current as NodeJS.Timeout); //when user exits, clear this interval.
+    // };
   }, []);
 
 
-
-
-  const load = (count: number) => {
+  const loadAnimation = (count: number) => {
     Animated.timing(loaderValue, {
       toValue: count, //final value
-      duration: 1000, //update value in 500 milliseconds
+      duration: 500, //update value in 500 milliseconds
       useNativeDriver: false,
     }).start();
   };
 
   useEffect(() => {
-    load(count)
     if (count >= 100) {
       setCount(100);
       clearInterval(countInterval.current as NodeJS.Timeout);
     }
-  }, [count]);
+  }, []);
+
+  const onCheckBoxChange = useCallback((num) =>() => {
+    const updateCheckBoxValues = [...checkBoxValues];
+    updateCheckBoxValues[num] = !updateCheckBoxValues[num];
+
+
+    const total = checkBoxValues.length;
+    const segment = 100 / total;
+    const current = updateCheckBoxValues.filter((item) => item === true).length
+    loadAnimation(segment * current)
+
+
+    setCheckBoxValues(updateCheckBoxValues);
+
+
+  }, [checkBoxValues]);
 
 
   return (
@@ -68,11 +83,45 @@ const CheckListScreen = () => {
       </View>
 
       <View style={styles.progressBar}>
-        <Animated.View style={[StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width}}/>
+        <Animated.View style={[StyleSheet.absoluteFill, {backgroundColor: "#8BED4F", width}]}/>
       </View>
 
+      <View style={styles.titleImageView}>
+        <Image style={styles.titleImage} source={require('@assets/house.png')}/>
+      </View>
 
-      <Text>하이</Text>
+      <View style={styles.titleView}>
+        <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
+      </View>
+
+      <CheckBox
+        disabled={false}
+        value={checkBoxValues[0]}
+        tintColors = {{ true: 'blue' , false: 'gray' }}
+        style={styles.checkBoxToggle}
+        onChange={onCheckBoxChange(0)}
+      />
+      <CheckBox
+        disabled={false}
+        value={checkBoxValues[1]}
+        tintColors = {{ true: 'blue' , false: 'gray' }}
+        style={styles.checkBoxToggle}
+        onChange={onCheckBoxChange(1)}
+      />
+      <CheckBox
+        disabled={false}
+        value={checkBoxValues[2]}
+        tintColors = {{ true: 'blue' , false: 'gray' }}
+        onChange={onCheckBoxChange(2)}
+      />
+      <CheckBox
+        disabled={false}
+        value={checkBoxValues[3]}
+        tintColors = {{ true: 'blue' , false: 'gray' }}
+        style={styles.checkBoxToggle}
+        onChange={onCheckBoxChange(3)}
+      />
+
     </View>
   )
 };
