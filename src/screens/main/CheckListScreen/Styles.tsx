@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
   checkBoxToggle: {
 
-  }
+  },
 
 });
 

@@ -2,22 +2,16 @@ import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {ActivityIndicator, Animated, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useCheckList} from "@query/checklist/useCheckList";
 import Loading from "@components/Loading/Loading"
-import styles from './Styles';
 import CheckBox from "@react-native-community/checkbox";
+import styles from './Styles';
+import Section from "@components/Sesction/Section";
 
 const totalIndex = 7;
 const currentIndex = 0;
 
-
 const CheckListScreen = () => {
-  // const {checkList, status, error} = useCheckList('전세계약!!');
-  //
-  // if (!checkList || status!== 'success') {
-  //   return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
-  // }
-  //
-  // const { title, subTitle } = checkList;
-
+  const {checkList, status, error} = useCheckList('전세 계약!!');
+  const { title, subTitle } = checkList;
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
   const [checkBoxValues, setCheckBoxValues] = useState([false, false, false, false])
@@ -29,7 +23,6 @@ const CheckListScreen = () => {
     extrapolate: "clamp"
   });
 
-
   useEffect(() => {
     // countInterval.current = setInterval(() => setCount((old) => old + 5), 1000);
     // return () => {
@@ -38,10 +31,11 @@ const CheckListScreen = () => {
   }, []);
 
 
+  // 0~100 사이로 값을 입력받고 해당 값에 대한 애니메이션 수행
   const loadAnimation = (count: number) => {
     Animated.timing(loaderValue, {
-      toValue: count, //final value
-      duration: 500, //update value in 500 milliseconds
+      toValue: count, // final value
+      duration: 500, // update value in 500 milliseconds
       useNativeDriver: false,
     }).start();
   };
@@ -57,18 +51,17 @@ const CheckListScreen = () => {
     const updateCheckBoxValues = [...checkBoxValues];
     updateCheckBoxValues[num] = !updateCheckBoxValues[num];
 
-
     const total = checkBoxValues.length;
     const segment = 100 / total;
     const current = updateCheckBoxValues.filter((item) => item === true).length
     loadAnimation(segment * current)
-
-
     setCheckBoxValues(updateCheckBoxValues);
-
 
   }, [checkBoxValues]);
 
+  if (!checkList || status!== 'success') {
+    return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
+  }
 
   return (
     <View style={styles.container}>
@@ -93,6 +86,8 @@ const CheckListScreen = () => {
       <View style={styles.titleView}>
         <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
       </View>
+
+      <Section/>
 
       <CheckBox
         disabled={false}
