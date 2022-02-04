@@ -10,8 +10,8 @@ const totalIndex = 7;
 const currentIndex = 0;
 
 const CheckListScreen = () => {
-  const {checkList, status, error} = useCheckList('전세 계약!!');
-  const { title, subTitle } = checkList;
+  // const {checkList, status, error} = useCheckList('전세 계약!!');
+
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
   const [checkBoxValues, setCheckBoxValues] = useState([false, false, false, false])
@@ -53,15 +53,19 @@ const CheckListScreen = () => {
 
     const total = checkBoxValues.length;
     const segment = 100 / total;
-    const current = updateCheckBoxValues.filter((item) => item === true).length
+    const current = updateCheckBoxValues.filter((item) => item).length
     loadAnimation(segment * current)
     setCheckBoxValues(updateCheckBoxValues);
 
   }, [checkBoxValues]);
 
-  if (!checkList || status!== 'success') {
-    return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
-  }
+  // let title, subTitle;
+  // if (!checkList || status!== 'success') {
+  //   return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
+  // } else {
+  //    title = checkList.title;
+  //    subTitle = checkList.subTitle;
+  // }
 
   return (
     <View style={styles.container}>
