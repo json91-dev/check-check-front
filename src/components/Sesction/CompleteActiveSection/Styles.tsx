@@ -1,49 +1,103 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  sectionView: {
-    flexDirection: 'row',
+  container: {
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '90%',
-    height: 80,
-    borderWidth: 1,
+
+    borderWidth: 2,
     marginLeft: '5%',
     marginTop: 30,
-    borderColor: 'blue',
+    borderColor: '#568ADD',
     borderRadius: 5,
-    paddingLeft: 20,
-    paddingRight: 10,
+    paddingTop: 15,
+    paddingLeft: 30,
+    paddingBottom: 30
   },
 
-  sectionViewLeftView: {
+  leftView: {
 
   },
 
-  sectionViewLeftViewTextTop: {
+  leftViewTextTop: {
     color: 'black',
     fontSize: 17,
   },
 
-  sectionViewLeftViewTextBottom: {
+  leftViewTextBottom: {
     marginTop: 5,
   },
 
-  sectionViewTouch: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '60%',
+  imageView: {
+    position: 'absolute',
+    top: 12,
   },
 
-  sectionViewText: {
-    color: 'blue',
+  imageViewImage: {
+    width: 30,
+    height: 30,
+    left: -15,
+    resizeMode: 'contain'
+  },
+
+  imageViewInnerView: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    th: 1,
+    left: -15,
+    width: 30,
+    height: 30,
+    top: 0,
+  },
+
+  imageViewInnerViewText: {
+    color: '#3070D5',
+    fontSize: 14,
     fontWeight: 'bold'
   },
 
-  sectionViewActiveView: {
+  elementView: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: -7,
+    marginTop: 20,
 
   },
 
+  elementViewText: {
+    fontSize: 16,
+    color: 'black',
+    paddingLeft: 5,
+  },
+
+  elementViewTouch: {
+    position: 'absolute',
+    width: 30,
+    height: 30,
+    padding: 4,
+    right: 0,
+  },
+
+  elementViewTouchImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
+  },
+
+  subTitleView: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  subElementRowView: {
+    marginTop: 20,
+    flexDirection: 'row'
+
+  }
 });
 
 export default styles;

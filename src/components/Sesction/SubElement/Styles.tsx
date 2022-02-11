@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '50%',
-
     alignItems: 'flex-start',
   },
 
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   rightViewTitleText: {
-    color: '5D5F5D',
+    color: '#5D5F5D',
     fontSize: 15,
     fontWeight: 'bold'
   },
@@ -40,9 +39,6 @@ const styles = StyleSheet.create({
   rightViewSubTitleText: {
     marginTop: 15
   }
-
-
-
 
 });
 
