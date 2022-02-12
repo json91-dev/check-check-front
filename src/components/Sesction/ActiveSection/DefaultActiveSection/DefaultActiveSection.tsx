@@ -1,8 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "./Styles";
+import styles from "../Styles";
 import React from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/SubElement/SubElement";
+import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
 
 const dummyElements = [
   {
@@ -53,9 +53,9 @@ const dummyElements = [
   }
 ]
 
-const CompleteActiveSection = () => {
+const DefaultActiveSection = () => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {borderColor: '#BABBBA'}]}>
 
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
@@ -88,13 +88,13 @@ const CompleteActiveSection = () => {
       </View>
 
       <View style={styles.imageView}>
-        <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
+        <Image style={styles.imageViewImage} source={require('@assets/circle_gray.png')} />
         <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>1</Text>
+          <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>1</Text>
         </View>
       </View>
     </View>
   )
 }
 
-export default CompleteActiveSection;
+export default DefaultActiveSection;

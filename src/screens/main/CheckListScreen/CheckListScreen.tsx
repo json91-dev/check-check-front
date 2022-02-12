@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {ActivityIndicator, Animated, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Animated, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useCheckList} from "@query/checklist/useCheckList";
 import Loading from "@components/Loading/Loading"
 import CheckBox from "@react-native-community/checkbox";
@@ -83,43 +83,45 @@ const CheckListScreen = () => {
         <Animated.View style={[StyleSheet.absoluteFill, {backgroundColor: "#8BED4F", width}]}/>
       </View>
 
-      <View style={styles.titleImageView}>
-        <Image style={styles.titleImage} source={require('@assets/house.png')}/>
-      </View>
+      <ScrollView>
+        <View style={styles.titleImageView}>
+          <Image style={styles.titleImage} source={require('@assets/house.png')}/>
+        </View>
 
-      <View style={styles.titleView}>
-        <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
-      </View>
+        <View style={styles.titleView}>
+          <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
+        </View>
 
-      <Section/>
+        <Section/>
 
-      <CheckBox
-        disabled={false}
-        value={checkBoxValues[0]}
-        tintColors = {{ true: 'blue' , false: 'gray' }}
-        style={styles.checkBoxToggle}
-        onChange={onCheckBoxChange(0)}
-      />
-      <CheckBox
-        disabled={false}
-        value={checkBoxValues[1]}
-        tintColors = {{ true: 'blue' , false: 'gray' }}
-        style={styles.checkBoxToggle}
-        onChange={onCheckBoxChange(1)}
-      />
-      <CheckBox
-        disabled={false}
-        value={checkBoxValues[2]}
-        tintColors = {{ true: 'blue' , false: 'gray' }}
-        onChange={onCheckBoxChange(2)}
-      />
-      <CheckBox
-        disabled={false}
-        value={checkBoxValues[3]}
-        tintColors = {{ true: 'blue' , false: 'gray' }}
-        style={styles.checkBoxToggle}
-        onChange={onCheckBoxChange(3)}
-      />
+        <CheckBox
+          disabled={false}
+          value={checkBoxValues[0]}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          style={styles.checkBoxToggle}
+          onChange={onCheckBoxChange(0)}
+        />
+        <CheckBox
+          disabled={false}
+          value={checkBoxValues[1]}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          style={styles.checkBoxToggle}
+          onChange={onCheckBoxChange(1)}
+        />
+        <CheckBox
+          disabled={false}
+          value={checkBoxValues[2]}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          onChange={onCheckBoxChange(2)}
+        />
+        <CheckBox
+          disabled={false}
+          value={checkBoxValues[3]}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          style={styles.checkBoxToggle}
+          onChange={onCheckBoxChange(3)}
+        />
+      </ScrollView>
 
     </View>
   )

@@ -1,8 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "./Styles";
+import styles from "../Styles";
 import React from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/SubElement/SubElement";
+import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
 
 const dummyElements = [
   {
@@ -53,16 +53,20 @@ const dummyElements = [
   }
 ]
 
-const DefaultActiveSection = () => {
+const CompleteActiveSection = () => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {borderColor: '#2D9929'}]}>
 
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
       </View>
 
       <View style={styles.elementView}>
-        <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
+        <CheckBox
+          style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          value={true}
+        />
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
         <TouchableOpacity style={styles.elementViewTouch}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
@@ -75,7 +79,11 @@ const DefaultActiveSection = () => {
       </View>
 
       <View style={styles.elementView}>
-        <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
+        <CheckBox
+          style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          value={true}
+        />
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
         <TouchableOpacity style={styles.elementViewTouch}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
@@ -88,13 +96,10 @@ const DefaultActiveSection = () => {
       </View>
 
       <View style={styles.imageView}>
-        <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
-        <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>1</Text>
-        </View>
+        <Image style={styles.imageViewImage} source={require('@assets/check-circle.png')} />
       </View>
     </View>
   )
 }
 
-export default DefaultActiveSection;
+export default CompleteActiveSection;

@@ -1,8 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "./Styles";
+import styles from "../Styles";
 import React from "react";
 
-const DefaultSection = () => {
+const StartSection = () => {
   return (
     <View style={styles.container}>
       <View style={styles.leftView}>
@@ -24,4 +24,4 @@ const DefaultSection = () => {
   )
 }
 
-export default DefaultSection;
+export default StartSection;
