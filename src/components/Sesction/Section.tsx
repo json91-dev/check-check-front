@@ -8,17 +8,16 @@ import DefaultActiveSection from "@components/Sesction/ActiveSection/DefaultActi
 import CompleteSection from "@components/Sesction/Section/CompleteSection/CompleteSection";
 import CompleteActiveSection from "@components/Sesction/ActiveSection/CompleteActiveSection/CompleteActiveSection";
 
-const Section = () => {
+const Section = ({setShowModal} : {setShowModal: Function}) => {
   // start, startActive, default, defaultActive, complete, completeActive
   const [sectionState, setSectionState] = useState('start')
-
 
   switch (sectionState) {
     case 'start': {
       return (
         <View>
           <StartSection/>
-          <StartActiveSection/>
+          <StartActiveSection setShowModal={setShowModal}/>
           <DefaultSection/>
           <DefaultActiveSection/>
           <CompleteSection/>

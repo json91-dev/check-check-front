@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     width: '42%',
     height: '95%',
@@ -22,3 +22,5 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   }
 });
+
+export default styles;

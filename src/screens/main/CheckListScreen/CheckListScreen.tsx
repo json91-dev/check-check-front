@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {ActivityIndicator, Animated, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Animated, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useCheckList} from "@query/checklist/useCheckList";
 import Loading from "@components/Loading/Loading"
 import CheckBox from "@react-native-community/checkbox";
 import styles from './Styles';
 import Section from "@components/Sesction/Section";
+import HelpModal from "@components/HelpModal/HelpModal";
 
 const totalIndex = 7;
 const currentIndex = 0;
@@ -67,6 +68,8 @@ const CheckListScreen = () => {
   //    subTitle = checkList.subTitle;
   // }
 
+  const [showModal, setShowModal] = useState(true)
+
   return (
     <View style={styles.container}>
       <View style={styles.topNavigation}>
@@ -92,7 +95,7 @@ const CheckListScreen = () => {
           <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
         </View>
 
-        <Section/>
+        <Section setShowModal={setShowModal}/>
 
         <CheckBox
           disabled={false}
@@ -122,6 +125,8 @@ const CheckListScreen = () => {
           onChange={onCheckBoxChange(3)}
         />
       </ScrollView>
+
+      {showModal? <HelpModal setShowModal={setShowModal}/> : null}
 
     </View>
   )

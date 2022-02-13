@@ -53,7 +53,7 @@ const dummyElements = [
   }
 ]
 
-const StartActiveSection = () => {
+const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
   return (
     <View style={styles.container}>
 
@@ -64,7 +64,7 @@ const StartActiveSection = () => {
       <View style={styles.elementView}>
         <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch}>
+        <TouchableOpacity style={styles.elementViewTouch} onPress={() => setShowModal(true)}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
         </TouchableOpacity>
       </View>
@@ -81,7 +81,7 @@ const StartActiveSection = () => {
           value={true}
         />
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch}>
+        <TouchableOpacity style={styles.elementViewTouch} onPress={() => setShowModal(true)}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
         </TouchableOpacity>
       </View>

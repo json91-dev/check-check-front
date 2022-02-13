@@ -1,6 +1,6 @@
 import {Image, TouchableOpacity, Text, ImageSourcePropType} from "react-native";
 import React from 'react';
-import {styles} from "./Styles";
+import styles from "./Styles";
 
 interface IconButtonProps {
   source?: any;
