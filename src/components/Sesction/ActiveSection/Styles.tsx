@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     width: '90%',
-
     borderWidth: 2,
     marginLeft: '5%',
     marginTop: 30,
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    th: 1,
     left: -15,
     width: 30,
     height: 30,

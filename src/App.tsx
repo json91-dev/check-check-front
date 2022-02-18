@@ -11,13 +11,16 @@
 import React from 'react';
 import Root from './screens/RootNavigator';
 import { QueryClientProvider ,QueryClient} from "react-query";
+import CustomContexts from "~/contexts";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Root/>
+      <CustomContexts>
+        <Root/>
+      </CustomContexts>
     </QueryClientProvider>
   );
 };

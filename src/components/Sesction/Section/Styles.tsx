@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    th: 1,
     left: -15,
     width: 30,
     height: 30,
@@ -69,8 +68,7 @@ const styles = StyleSheet.create({
     color: '#3070D5',
     fontSize: 14,
     fontWeight: 'bold'
-  },
-
+  }
 });
 
 export default styles;

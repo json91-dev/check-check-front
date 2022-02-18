@@ -1,10 +1,11 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "../Styles";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
+
 
 const StartSection = () => {
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container]}>
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
         <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
@@ -20,7 +21,7 @@ const StartSection = () => {
           <Text style={styles.imageViewInnerViewText}>1</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

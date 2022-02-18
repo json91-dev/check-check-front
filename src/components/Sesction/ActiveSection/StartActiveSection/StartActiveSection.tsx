@@ -1,6 +1,6 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "../Styles";
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
 
@@ -54,8 +54,28 @@ const dummyElements = [
 ]
 
 const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
+  const animatedValue = new Animated.Value(0);
+  useEffect(() => {
+    Animated.timing(
+      animatedValue,
+      {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true
+      }
+    ).start(() => {
+      // this.props.afterAnimationComplete();
+    });
+  }, [])
+
+
+  const opacityAnimation: any = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1]
+  });
+
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, {opacity: opacityAnimation}]}>
 
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
@@ -97,7 +117,7 @@ const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
           <Text style={styles.imageViewInnerViewText}>1</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 
