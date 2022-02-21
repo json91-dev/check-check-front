@@ -15,36 +15,37 @@ const Section = ({setShowModal} : {setShowModal: Function}) => {
   switch (sectionState) {
     case 'start': {
       return (
-        <View>
-          <StartSection/>
-          <StartActiveSection setShowModal={setShowModal}/>
-          <DefaultSection/>
-          <DefaultActiveSection/>
-          <CompleteSection/>
-          <CompleteActiveSection />
-        </View>
+        <StartSection setSectionState={setSectionState}/>
       )
     }
     case 'startActive': {
       return (
-        <StartActiveSection/>
+        <StartActiveSection setShowModal={setShowModal} setSectionState={setSectionState}/>
       )
     }
 
     case 'default': {
-      return null;
+      return (
+        <DefaultSection setSectionState={setSectionState}/>
+      )
     }
 
     case 'defaultActive': {
-      return null;
+      return (
+        <DefaultActiveSection setSectionState={setSectionState}/>
+      );
     }
 
     case 'complete': {
-      return null;
+      return (
+        <CompleteSection setSectionState={setSectionState}/>
+      )
     }
 
     case 'completeActive': {
-      return null;
+      return (
+        <CompleteActiveSection setSectionState={setSectionState}/>
+      );
     }
 
     default: {

@@ -1,8 +1,9 @@
 import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "../Styles";
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
+import {useSafeArea} from "react-native-safe-area-context";
 
 const dummyElements = [
   {
@@ -55,28 +56,63 @@ const dummyElements = [
 
 const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
   const animatedValue = new Animated.Value(0);
+  const sectionHeightRef = useRef(0);
+  const [isAnimated, setIsAnimated] = useState(false)
   useEffect(() => {
     Animated.timing(
       animatedValue,
       {
         toValue: 1,
-        duration: 800,
-        useNativeDriver: true
+        duration: 300,
+        useNativeDriver: false
       }
     ).start(() => {
       // this.props.afterAnimationComplete();
     });
-  }, [])
-
+  }, [sectionHeightRef.current])
 
   const opacityAnimation: any = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1]
   });
 
-  return (
-    <Animated.View style={[styles.container, {opacity: opacityAnimation}]}>
+  const height: number = sectionHeightRef.current
+  console.log(height)
+  const heightAnimation: any = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, height]
+  })
 
+  const find_dimesions = (layout) =>{
+    const { height } = layout;
+    sectionHeightRef.current = height;
+
+    if (!isAnimated) {
+      setIsAnimated(true)
+    }
+  }
+
+
+  const getHeight = () => {
+    if (sectionHeightRef.current === 0) {
+      return 'auto'
+    } else {
+      return heightAnimation
+    }
+  }
+
+  const getOpacity = () => {
+    if (sectionHeightRef.current === 0) {
+      return 0
+    } else {
+      return 1
+    }
+  }
+
+
+  return (
+    // <Animated.View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }} style={[styles.container, {opacity: opacityAnimation}]}>
+    <Animated.View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }} style={[styles.container, {height: getHeight(), opacity: opacityAnimation}]}>
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
       </View>

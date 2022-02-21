@@ -3,7 +3,9 @@ import styles from "../Styles";
 import React, {useEffect, useRef, useState} from "react";
 
 
-const StartSection = () => {
+const StartSection = ({setSectionState}) => {
+
+
   return (
     <Animated.View style={[styles.container]}>
       <View style={styles.leftView}>
@@ -11,7 +13,7 @@ const StartSection = () => {
         <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
       </View>
 
-      <TouchableOpacity style={styles.touch}>
+      <TouchableOpacity style={styles.touch} onPress={() => setSectionState('startActive')}>
         <Text style={styles.touchText}>시작하기</Text>
       </TouchableOpacity>
 

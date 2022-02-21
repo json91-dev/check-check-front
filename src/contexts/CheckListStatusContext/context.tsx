@@ -1,7 +1,14 @@
 import React, { createContext, useReducer } from 'react'
 
 const initialState = {
-	data: [],
+	checkListClicked: [{
+		title:'전세 계약',
+		sections: {
+			["필요서류 준비하기"]: false,
+
+		}
+
+	}],
 }
 const CheckListStatusContext = createContext(initialState)
 const { Provider } = CheckListStatusContext

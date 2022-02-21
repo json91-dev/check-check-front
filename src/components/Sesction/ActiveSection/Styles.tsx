@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingTop: 15,
     paddingLeft: 30,
-    paddingBottom: 30
+    paddingBottom: 30,
   },
 
   leftView: {
