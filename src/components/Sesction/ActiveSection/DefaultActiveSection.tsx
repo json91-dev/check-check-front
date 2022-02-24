@@ -1,8 +1,9 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "../Styles";
+import styles from "./Styles";
 import React from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
+import SubElement from "@components/Sesction/SubElement/SubElement";
+import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
 
 const dummyElements = [
   {
@@ -55,7 +56,7 @@ const dummyElements = [
 
 const DefaultActiveSection = () => {
   return (
-    <View style={[styles.container, {borderColor: '#BABBBA'}]}>
+    <FadeInAnimationView containerStyle={{...styles.container, borderColor: '#BABBBA'}}>
 
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
@@ -93,7 +94,7 @@ const DefaultActiveSection = () => {
           <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>1</Text>
         </View>
       </View>
-    </View>
+    </FadeInAnimationView>
   )
 }
 

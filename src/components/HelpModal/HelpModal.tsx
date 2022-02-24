@@ -2,12 +2,19 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from "react-nati
 import React from "react";
 import styles from './Styles';
 
-const HelpModal = ({setShowModal}: {setShowModal: Function}) => {
+const HelpModal = ({setShowModal, showModal}: {setShowModal: Function}) => {
   return (
     <Modal
       animationType="slide"
+      hardwareAccelerated={true}
       transparent={true}
-      visible={true}
+      visible={showModal}
+      hideModalContentWhileAnimating={true}
+      useNativeDriverForBackdrop={true}
+      animationInTiming={3000}
+      animationOutTiming={3000}
+      backdropTransitionInTiming={3000}
+      backdropTransitionOutTiming={3000}
       onRequestClose={() => {
         // Alert.alert("Modal has been closed.");
         // setModalVisible(!modalVisible);

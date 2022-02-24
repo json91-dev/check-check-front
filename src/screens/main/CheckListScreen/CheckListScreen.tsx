@@ -126,7 +126,7 @@ const CheckListScreen = () => {
         />
       </ScrollView>
 
-      {showModal? <HelpModal setShowModal={setShowModal}/> : null}
+      <HelpModal setShowModal={setShowModal} showModal={showModal}/>
 
     </View>
   )

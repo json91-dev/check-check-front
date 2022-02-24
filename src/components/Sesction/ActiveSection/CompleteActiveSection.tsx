@@ -1,9 +1,9 @@
-import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "../Styles";
-import React, {useEffect, useRef, useState} from "react";
+import {Image, Text, TouchableOpacity, View} from "react-native";
+import styles from "./Styles";
+import React from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/ActiveSection/SubElement/SubElement";
-import {useSafeArea} from "react-native-safe-area-context";
+import SubElement from "@components/Sesction/SubElement/SubElement";
+import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
 
 const dummyElements = [
   {
@@ -54,73 +54,21 @@ const dummyElements = [
   }
 ]
 
-const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
-  const animatedValue = new Animated.Value(0);
-  const sectionHeightRef = useRef(0);
-  const [isAnimated, setIsAnimated] = useState(false)
-  useEffect(() => {
-    Animated.timing(
-      animatedValue,
-      {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: false
-      }
-    ).start(() => {
-      // this.props.afterAnimationComplete();
-    });
-  }, [sectionHeightRef.current])
-
-  const opacityAnimation: any = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1]
-  });
-
-  const height: number = sectionHeightRef.current
-  console.log(height)
-  const heightAnimation: any = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, height]
-  })
-
-  const find_dimesions = (layout) =>{
-    const { height } = layout;
-    sectionHeightRef.current = height;
-
-    if (!isAnimated) {
-      setIsAnimated(true)
-    }
-  }
-
-
-  const getHeight = () => {
-    if (sectionHeightRef.current === 0) {
-      return 'auto'
-    } else {
-      return heightAnimation
-    }
-  }
-
-  const getOpacity = () => {
-    if (sectionHeightRef.current === 0) {
-      return 0
-    } else {
-      return 1
-    }
-  }
-
-
+const CompleteActiveSection = () => {
   return (
-    // <Animated.View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }} style={[styles.container, {opacity: opacityAnimation}]}>
-    <Animated.View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }} style={[styles.container, {height: getHeight(), opacity: opacityAnimation}]}>
+    <FadeInAnimationView containerStyle={{...styles.container, borderColor: '#2D9929'}}>
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
       </View>
 
       <View style={styles.elementView}>
-        <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
+        <CheckBox
+          style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
+          tintColors = {{ true: 'blue' , false: 'gray' }}
+          value={true}
+        />
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch} onPress={() => setShowModal(true)}>
+        <TouchableOpacity style={styles.elementViewTouch}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
         </TouchableOpacity>
       </View>
@@ -137,7 +85,7 @@ const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
           value={true}
         />
         <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch} onPress={() => setShowModal(true)}>
+        <TouchableOpacity style={styles.elementViewTouch}>
           <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
         </TouchableOpacity>
       </View>
@@ -148,13 +96,10 @@ const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
       </View>
 
       <View style={styles.imageView}>
-        <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
-        <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>1</Text>
-        </View>
+        <Image style={styles.imageViewImage} source={require('@assets/check-circle.png')} />
       </View>
-    </Animated.View>
+    </FadeInAnimationView>
   )
 }
 
-export default StartActiveSection;
+export default CompleteActiveSection;

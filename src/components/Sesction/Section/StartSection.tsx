@@ -1,11 +1,9 @@
 import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "../Styles";
+import styles from "./Styles";
 import React, {useEffect, useRef, useState} from "react";
 
 
 const StartSection = ({setSectionState}) => {
-
-
   return (
     <Animated.View style={[styles.container]}>
       <View style={styles.leftView}>

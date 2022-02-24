@@ -1,8 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "../Styles";
+import styles from "./Styles";
 import React from "react";
 
-const CompleteSection = () => {
+const CompleteSection = ({setSectionState}) => {
   return (
     <View style={[styles.container, {borderColor: '#2D9929'}]}>
       <View style={styles.leftView}>
@@ -10,7 +10,7 @@ const CompleteSection = () => {
         <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
       </View>
 
-      <TouchableOpacity style={styles.touch}>
+      <TouchableOpacity style={styles.touch} onPress={setSectionState('completeActive')}>
         <Text style={[styles.touchText, {color: '#2D9929'}]}>완료</Text>
       </TouchableOpacity>
 

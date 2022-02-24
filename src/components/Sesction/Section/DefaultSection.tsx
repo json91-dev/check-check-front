@@ -1,8 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styles from "../Styles";
+import styles from "./Styles";
 import React from "react";
 
-const DefaultSection = () => {
+const DefaultSection = ({setSectionState}) => {
   return (
     <View style={[styles.container, {borderColor: '#BABBBA'}]}>
       <View style={styles.leftView}>
@@ -10,7 +10,7 @@ const DefaultSection = () => {
         <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
       </View>
 
-      <TouchableOpacity style={styles.touch}>
+      <TouchableOpacity style={styles.touch} onPress={() => setSectionState('defaultActive')}>
         <Text style={[styles.touchText, {color: '#4B4D4B'}]}>항목보기</Text>
       </TouchableOpacity>
 
