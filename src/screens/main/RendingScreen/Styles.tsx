@@ -1,4 +1,6 @@
 import {StyleSheet} from "react-native";
+import {Dimensions} from 'react-native';
+const screenWidth = Dimensions.get('screen').width;
 
 const styles = StyleSheet.create({
   container: {
@@ -7,23 +9,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
-  row: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: '30%',
-    marginBottom: 10,
-  },
-
   headerView: {
-    height: '10%',
-    paddingTop: 20,
+    height: '15%',
+    paddingTop: 50,
     paddingLeft: '10%',
     paddingRight: '10%',
   },
 
   headerViewText: {
-    fontSize: 18,
+    fontSize: 25,
     color: 'black',
     fontWeight: 'bold'
   },
@@ -51,6 +45,14 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
   },
+
+  flatList: {
+    height: '70%',
+  },
+
+  flatListContent: {
+    paddingLeft: screenWidth * 0.1
+  }
 });
 
 export default styles;

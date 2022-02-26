@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
@@ -32,7 +32,6 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
     },
   ]);
 
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerView}>
@@ -41,20 +40,16 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
         </Text>
       </View>
 
-      <View style={styles.buttonView}>
-        <View style={styles.row}>
+      <FlatList
+        data={items}
+        style={styles.flatList}
+        contentContainerStyle={styles.flatListContent}
+        renderItem={({ item }) => (
           <IconButton source={require('@assets/monthly_pay.png')} text={'월세 계약'}/>
-          <IconButton source={require('@assets/yearly_pay.png')} text={'전세 계약'}/>
-        </View>
-        <View style={styles.row}>
-          <IconButton source={require('@assets/moving_truck.png')} text={'이사'}/>
-          <IconButton source={require('@assets/buy_house.png')} text={'집 구매'}/>
-        </View>
-        <View style={styles.row}>
-          <IconButton source={require('@assets/search_house.png')} text={'집 찾기'}/>
-          <IconButton source={require('@assets/cart.png')} text={'TBD?'}/>
-        </View>
-      </View>
+        )}
+        numColumns={2}
+        keyExtractor={(item, index) => index + item}
+      />
 
       <View style={styles.bottomView}>
         <TouchableOpacity style={styles.bottomViewTouch}>

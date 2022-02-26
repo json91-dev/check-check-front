@@ -1,4 +1,4 @@
-import {Image, TouchableOpacity, Text, ImageSourcePropType} from "react-native";
+import {Image, TouchableOpacity, Text, View} from "react-native";
 import React from 'react';
 import styles from "./Styles";
 
@@ -9,10 +9,12 @@ interface IconButtonProps {
 
 const IconButton = ({source, text} : IconButtonProps) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <Image style={styles.image} source={source}/>
-      <Text style={styles.text}>{text}</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.touch}>
+        <Image style={styles.image} source={source}/>
+        <Text style={styles.text}>{text}</Text>
+      </TouchableOpacity>
+    </View>
   )
 };
 

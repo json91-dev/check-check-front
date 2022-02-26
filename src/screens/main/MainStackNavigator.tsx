@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName = "CheckListScreen"
+      initialRouteName = "RendingScreen"
     >
       <Stack.Screen name="RendingScreen" options={{ headerShown: false}} component={RendingScreen}/>
       <Stack.Screen name="CheckListScreen" options={{ headerShown: false}} component={CheckListScreen}/>
