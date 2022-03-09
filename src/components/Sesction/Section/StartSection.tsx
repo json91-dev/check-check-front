@@ -1,14 +1,23 @@
 import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React, {useEffect, useRef, useState} from "react";
+import {CheckListSectionsInterface} from "@query/queryInterface";
 
+interface SectionProps {
+  setSectionState: Function,
+  setShowModal: Function,
+  sectionData: CheckListSectionsInterface,
+  sectionIndex: number,
+}
 
-const StartSection = ({setSectionState}) => {
+const StartSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
+  const {sectionTitle, checkListElements} = sectionData
+
   return (
     <Animated.View style={[styles.container]}>
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
-        <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
+        <Text style={styles.leftViewTextBottom}>체크리스트 {checkListElements.length}개</Text>
       </View>
 
       <TouchableOpacity style={styles.touch} onPress={() => setSectionState('startActive')}>
@@ -18,7 +27,7 @@ const StartSection = ({setSectionState}) => {
       <View style={styles.imageView}>
         <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
         <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>1</Text>
+          <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>{sectionIndex + 1}</Text>
         </View>
       </View>
     </Animated.View>

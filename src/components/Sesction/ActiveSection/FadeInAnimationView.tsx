@@ -1,7 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const FadeInAnimationView = ({children, containerStyle}) => {
+interface FadeInAnimationProps {
+  children: any,
+  containerStyle: Object,
+}
+
+const FadeInAnimationView = ({children, containerStyle}: FadeInAnimationProps) => {
   const animatedValue = new Animated.Value(0);
   const sectionHeightRef = useRef(0);
   const [isAnimated, setIsAnimated] = useState(false)
@@ -28,8 +33,8 @@ const FadeInAnimationView = ({children, containerStyle}) => {
     outputRange: [0, height]
   })
 
-  const find_dimesions = (layout) => {
-    const {height} = layout;
+  const find_dimesions = (layout: any) => {
+    const { height } = layout;
     sectionHeightRef.current = height;
 
     if (!isAnimated) {

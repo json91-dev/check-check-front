@@ -4,58 +4,16 @@ import React from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@components/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
+import {CheckListSectionsInterface} from "@query/queryInterface";
 
-const dummyElements = [
-  {
-    "elementName": "주민등록 초본 또는 등본 발급",
-    "subElements": [
-      {
-        "iconName": "building",
-        "subElementTitle": "받을 수 있는 곳",
-        "subElementDescription": "온라인 민원24 동사무소/구청"
-      },
-      {
-        "iconName": "document",
-        "subElementTitle": "필요한 서류",
-        "subElementDescription": "신분증"
-      }
-    ],
-    "help": {
-      "helpTitle": "도와줄게요",
-      "helpDescription": "help me !!!",
-      "helpTopics": [
-        "주민등록",
-        "사업자등록"
-      ]
-    }
-  },
-  {
-    "elementName": "가족관계 증명서 발급",
-    "subElements": [
-      {
-        "iconName": "building",
-        "subElementTitle": "받을 수 있는 곳",
-        "subElementDescription": "온라인 민원24 동사무소/구청"
-      },
-      {
-        "iconName": "document",
-        "subElementTitle": "필요한 서류",
-        "subElementDescription": "신분증"
-      }
-    ],
-    "help": {
-      "helpTitle": "도와줄게요",
-      "helpDescription": "도움말 설명",
-      "helpTopics": [
-        "주민등록",
-        "사업자등록"
-      ]
-    }
-  }
-]
+interface SectionProps {
+  setSectionState: Function,
+  setShowModal: Function,
+  sectionData: CheckListSectionsInterface,
+  sectionIndex: number,
+}
 
-const StartActiveSection = ({setShowModal} : {setShowModal: Function}) => {
-
+const StartActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
 
   return (
     <FadeInAnimationView containerStyle={styles.container}>

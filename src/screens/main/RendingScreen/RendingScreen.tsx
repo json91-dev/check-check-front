@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import styles from "./Styles";
 // @ts-ignore
@@ -11,6 +11,9 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
   const [selectedSubjectTitle, setSelectedSubjectTitle] = useState('');
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState(-1);
   const [selectedSubjectId, setSelectedSubjectId] = useState('');
+  const onPressTouch = useCallback(() => {
+    navigation.navigate('CheckListScreen', {subjectId: selectedSubjectId})
+  }, [selectedSubjectIndex])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,7 +48,7 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
       { selectedSubjectIndex > -1
         ? (
           <View style={styles.bottomView}>
-            <TouchableOpacity style={styles.bottomViewTouch}>
+            <TouchableOpacity style={styles.bottomViewTouch} onPress={onPressTouch}>
               <Image style={styles.bottomViewImage} source={require('@assets/next_btn_active.png')} />
             </TouchableOpacity>
           </View>

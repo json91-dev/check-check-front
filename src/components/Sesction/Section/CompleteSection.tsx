@@ -1,13 +1,22 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React from "react";
+import {CheckListSectionsInterface} from "@query/queryInterface";
 
-const CompleteSection = ({setSectionState}) => {
+interface SectionProps {
+  setSectionState: Function,
+  setShowModal: Function,
+  sectionData: CheckListSectionsInterface,
+  sectionIndex: number,
+}
+
+const CompleteSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
+  const {sectionTitle, checkListElements} = sectionData
   return (
     <View style={[styles.container, {borderColor: '#2D9929'}]}>
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
-        <Text style={styles.leftViewTextBottom}>체크리스트 2개</Text>
+        <Text style={styles.leftViewTextBottom}>체크리스트 {checkListElements.length}개</Text>
       </View>
 
       <TouchableOpacity style={styles.touch} onPress={setSectionState('completeActive')}>

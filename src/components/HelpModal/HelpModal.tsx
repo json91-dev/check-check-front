@@ -2,7 +2,7 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from "react-nati
 import React from "react";
 import styles from './Styles';
 
-const HelpModal = ({setShowModal, showModal}: {setShowModal: Function}) => {
+const HelpModal = ({setShowModal, showModal}: {setShowModal: Function, showModal: boolean}) => {
   return (
     <Modal
       animationType="slide"

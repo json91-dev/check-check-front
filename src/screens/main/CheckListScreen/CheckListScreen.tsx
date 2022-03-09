@@ -10,8 +10,27 @@ import HelpModal from "@components/HelpModal/HelpModal";
 const totalIndex = 7;
 const currentIndex = 0;
 
-const CheckListScreen = () => {
-  // const {checkList, status, error} = useCheckList('전세 계약!!');
+interface CheckListScreenProps {
+  navigation: any,
+  route: any
+}
+
+const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
+  const [showModal, setShowModal] = useState(true)
+
+  let subjectId;
+  if (route.params.subjectId) {
+    subjectId = route.params.subjectId
+  } else {
+    subjectId = 1
+  }
+
+  const { getCheckListByIdQuery } = useCheckList(undefined, subjectId);
+  const checkList = getCheckListByIdQuery?.data?.data;
+  const isLoading = getCheckListByIdQuery?.isFetching;
+  const subTitle = checkList? checkList.subTitle: null;
+  const imageUrl = checkList? checkList.imageUrl: null;
+  const checkListSection = checkList? checkList.checkListSections: null;
 
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
@@ -60,15 +79,9 @@ const CheckListScreen = () => {
 
   }, [checkBoxValues]);
 
-  // let title, subTitle;
-  // if (!checkList || status!== 'success') {
-  //   return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
-  // } else {
-  //    title = checkList.title;
-  //    subTitle = checkList.subTitle;
-  // }
-
-  const [showModal, setShowModal] = useState(true)
+  if (isLoading) {
+    return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
+  }
 
   return (
     <View style={styles.container}>
@@ -92,10 +105,16 @@ const CheckListScreen = () => {
         </View>
 
         <View style={styles.titleView}>
-          <Text style={styles.titleText}>[유저네임]의 전세집 계약하기</Text>
+          <Text style={styles.titleText}>{subTitle}</Text>
         </View>
 
-        <Section setShowModal={setShowModal}/>
+        {
+          checkListSection.map((section: any, index: number) => {
+            return (
+              <Section key={section.id + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} />
+            )
+          })
+        }
 
         <CheckBox
           disabled={false}
