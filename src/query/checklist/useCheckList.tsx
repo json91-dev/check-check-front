@@ -16,18 +16,18 @@ const getCheckListSubjects = () => {
   );
 };
 
-const getCheckListById = (id) => {
+const getCheckListById = (id: string) => () => {
   return axios.get(
     `http://158.247.192.7:8080/api/v1/checklist/${id}`,
   );
 }
 
-export const useCheckList = (subjectTitle: string, id: string) => {
+export const useCheckList = (subjectTitle?: string, id?: string) => {
   const getCheckListBySubTitleQuery = subjectTitle? useQuery(subjectTitle, getCheckListBySubTitle(subjectTitle), defaultQueryOptions) : null;
 
   const getCheckListSubjectsQuery = useQuery('subjects', getCheckListSubjects, defaultQueryOptions)
 
-  const getCheckListByIdQuery = id? useQuery(id, getCheckListById, defaultQueryOptions) : null;
+  const getCheckListByIdQuery = id? useQuery(id, getCheckListById(id), defaultQueryOptions) : null;
 
   return {
     getCheckListBySubTitleQuery,

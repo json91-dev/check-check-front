@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
     height: '94%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 3,
     borderRadius: 10,
+    borderColor: '#BABBBA'
   },
 
-  text: {
+  subjectTitle: {
     fontSize: 17,
     marginTop: 20,
     fontWeight: 'bold'

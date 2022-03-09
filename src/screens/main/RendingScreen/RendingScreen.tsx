@@ -3,34 +3,14 @@ import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'reac
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
+import {useCheckList} from "@query/checklist/useCheckList";
 
 const RendingScreen = ({ navigation }: {navigation: any}) => {
-  const [items, setItems] = useState([
-    {
-      source: '@assets/monthly_pay.png',
-      isChecked: false
-    },
-    {
-      source: '@assets/yearly_pay.png',
-      isChecked: false
-    },
-    {
-      source: '@assets/moving_truck.png',
-      isChecked: false
-    },
-    {
-      source: '@assets/buy_house.png',
-      isChecked: false
-    },
-    {
-      source: '@assets/search_house.png',
-      isChecked: false
-    },
-    {
-      source: '@assets/cart.png',
-      isChecked: false
-    },
-  ]);
+  const {getCheckListSubjectsQuery} = useCheckList()
+  const subjects  = getCheckListSubjectsQuery.data?.data;
+  const [selectedSubjectTitle, setSelectedSubjectTitle] = useState('');
+  const [selectedSubjectIndex, setSelectedSubjectIndex] = useState(-1);
+  const [selectedSubjectId, setSelectedSubjectId] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -40,22 +20,42 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
         </Text>
       </View>
 
-      <FlatList
-        data={items}
-        style={styles.flatList}
-        contentContainerStyle={styles.flatListContent}
-        renderItem={({ item }) => (
-          <IconButton source={require('@assets/monthly_pay.png')} text={'월세 계약'}/>
-        )}
-        numColumns={2}
-        keyExtractor={(item, index) => index + item}
-      />
+      {subjects?
+        <FlatList
+          data={subjects}
+          style={styles.flatList}
+          contentContainerStyle={styles.flatListContent}
+          renderItem={({item, index}) => {
+            return <IconButton
+              source={{uri: 'https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg'}}
+              subject={item}
+              index={index}
+              setSelectedSubjectTitle={setSelectedSubjectTitle}
+              setSelectedSubjectIndex={setSelectedSubjectIndex}
+              selectedSubjectIndex={selectedSubjectIndex}
+              setSelectedSubjectId={setSelectedSubjectId}
+            />
+          }}
 
-      <View style={styles.bottomView}>
-        <TouchableOpacity style={styles.bottomViewTouch}>
-          <Image style={styles.bottomViewImage} source={require('@assets/next_btn_active.png')} />
-        </TouchableOpacity>
-      </View>
+          numColumns={2}
+          keyExtractor={(item, index) => index + item.source}
+        /> : null
+      }
+
+      { selectedSubjectIndex > -1
+        ? (
+          <View style={styles.bottomView}>
+            <TouchableOpacity style={styles.bottomViewTouch}>
+              <Image style={styles.bottomViewImage} source={require('@assets/next_btn_active.png')} />
+            </TouchableOpacity>
+          </View>
+        )
+        : (
+          <View style={styles.bottomView}>
+            <Image style={styles.bottomViewImage} source={require('@assets/next_btn_inactive.png')} />
+          </View>
+        )
+      }
     </SafeAreaView>
   )
 };
