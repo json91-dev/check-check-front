@@ -1,8 +1,14 @@
 import {Image, Text, View} from "react-native";
 import React from "react";
 import styles from './Styles';
+import {CheckListSectionInterface, SubElementInterface} from "@query/queryInterface";
 
-const SubElement = () => {
+interface SubElementProps {
+  subElement: SubElementInterface,
+}
+
+const SubElement = ({subElement}: SubElementProps) => {
+  const {iconUrl, subElementTitle, subElementDescription} = subElement
   return (
     <View style={styles.container}>
       <View style={styles.leftView}>
@@ -11,8 +17,8 @@ const SubElement = () => {
         </View>
       </View>
       <View style={styles.rightView}>
-        <Text style={styles.rightViewTitleText}>받을 수 있는 곳</Text>
-        <Text style={styles.rightViewSubTitleText}>온라인 민원 24 {"\n"}동사무소 구청</Text>
+        <Text style={styles.rightViewTitleText}>{subElementTitle}</Text>
+        <Text style={styles.rightViewSubTitleText}>{subElementDescription}</Text>
       </View>
     </View>
   )

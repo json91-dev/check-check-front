@@ -3,25 +3,25 @@ export interface CheckListInterface {
   "subjectTitle": string,
   "subTitle": string,
   "imageUrl": string,
-  "checkListSections": Array<CheckListSectionsInterface>
+  "checkListSections": Array<CheckListSectionInterface>
 }
 
-export interface CheckListSectionsInterface {
+export interface CheckListSectionInterface {
   "id": number,
   "sectionTitle": string,
-  "checkListElements": Array<CheckListElementsInterface>
+  "checkListElements": Array<CheckListElementInterface>
 }
 
-export interface CheckListElementsInterface {
+export interface CheckListElementInterface {
   "id": number,
   "elementName": string,
-  "subElements": Array<SubElementsInterface>,
+  "subElements": Array<SubElementInterface>,
   "helpTitle": string,
   "helpDescription": string,
   "helpTopics": Array<HelpTopicsInterface>
 }
 
-export interface SubElementsInterface {
+export interface SubElementInterface {
   "id": number,
   "iconUrl": string,
   "subElementTitle": string,

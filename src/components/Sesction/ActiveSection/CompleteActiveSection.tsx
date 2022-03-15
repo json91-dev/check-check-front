@@ -4,55 +4,47 @@ import React from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@components/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
-import {CheckListSectionsInterface} from "@query/queryInterface";
+import {CheckListSectionInterface} from "@query/queryInterface";
 
 interface SectionProps {
   setSectionState: Function,
   setShowModal: Function,
-  sectionData: CheckListSectionsInterface,
+  sectionData: CheckListSectionInterface,
   sectionIndex: number,
 }
 
 const CompleteActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
+  const {sectionTitle, checkListElements} = sectionData;
+
   return (
     <FadeInAnimationView containerStyle={{...styles.container, borderColor: '#2D9929'}}>
       <View style={styles.leftView}>
-        <Text style={styles.leftViewTextTop}>필요서류 준비하기</Text>
+        <Text style={styles.leftViewTextTop}>{sectionTitle}</Text>
       </View>
 
-      <View style={styles.elementView}>
-        <CheckBox
-          style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
-          tintColors = {{ true: 'blue' , false: 'gray' }}
-          value={true}
-        />
-        <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch}>
-          <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
-        </TouchableOpacity>
-      </View>
+      {checkListElements.map(checkListElement => {
+        const {elementName, subElements, id} = checkListElement
+        return (
+          <View key={id + elementName} style={{width: '100%'}}>
+            <View style={styles.elementView}>
+              <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
+              <Text style={styles.elementViewText}>{elementName}</Text>
+              <TouchableOpacity style={styles.elementViewTouch}>
+                <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
+              </TouchableOpacity>
+            </View>
 
-      <View style={styles.subElementRowView}>
-        <SubElement/>
-        <SubElement/>
-      </View>
-
-      <View style={styles.elementView}>
-        <CheckBox
-          style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
-          tintColors = {{ true: 'blue' , false: 'gray' }}
-          value={true}
-        />
-        <Text style={styles.elementViewText}>주민등록 초본 또는 등본 발급</Text>
-        <TouchableOpacity style={styles.elementViewTouch}>
-          <Image style={styles.elementViewTouchImage} source={require('@assets/question_mark.png')}/>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.subElementRowView}>
-        <SubElement/>
-        <SubElement/>
-      </View>
+            <View style={styles.subElementRowView}>
+              {subElements.map(subElement => {
+                const {id, subElementTitle} = subElement
+                return (
+                  <SubElement key={id + subElementTitle} subElement={subElement}/>
+                )
+              })}
+            </View>
+          </View>
+        )
+      })}
 
       <View style={styles.imageView}>
         <Image style={styles.imageViewImage} source={require('@assets/check-circle.png')} />

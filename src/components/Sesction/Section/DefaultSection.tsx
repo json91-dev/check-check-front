@@ -1,12 +1,12 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React from "react";
-import {CheckListSectionsInterface} from "@query/queryInterface";
+import {CheckListSectionInterface} from "@query/queryInterface";
 
 interface SectionProps {
   setSectionState: Function,
   setShowModal: Function,
-  sectionData: CheckListSectionsInterface,
+  sectionData: CheckListSectionInterface,
   sectionIndex: number,
 }
 

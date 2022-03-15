@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import StartSection from "@components/Sesction/Section/StartSection";
 import StartActiveSection from "@components/Sesction/ActiveSection/StartActiveSection";
 import DefaultSection from "@components/Sesction/Section/DefaultSection";
@@ -14,42 +14,50 @@ interface SectionProps {
 
 const Section = ({setShowModal, sectionData, sectionIndex}: SectionProps ) => {
   // start, startActive, default, defaultActive, complete, completeActive
-  const [sectionState, setSectionState] = useState('default')
+  const [sectionState, setSectionState] = useState('complete')
+
+  const onPressSectionState = useCallback((state) => () => {
+    setSectionState(state)
+  }, [sectionState])
+
+  useEffect(() => {
+    setSectionState('start')
+  }, [])
 
   switch (sectionState) {
     case 'start': {
       return (
-        <StartSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <StartSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       )
     }
 
     case 'default': {
       return (
-        <DefaultSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <DefaultSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       )
     }
 
     case 'complete': {
       return (
-        <CompleteSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <CompleteSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       )
     }
 
     case 'startActive': {
       return (
-        <StartActiveSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <StartActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       )
     }
 
     case 'defaultActive': {
       return (
-        <DefaultActiveSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <DefaultActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       );
     }
 
     case 'completeActive': {
       return (
-        <CompleteActiveSection setSectionState={setSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <CompleteActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
       );
     }
 
