@@ -1,11 +1,14 @@
 import React from 'react'
 import { CheckListStatusProvider } from './CheckListStatusContext/context'
+import { HelpModalProvider } from './HelpModalContext/context'
 
-const CustomContexts = ({ children }) => {
+const CustomContexts = ({ children }: any) => {
 	return (
-		<CheckListStatusProvider>
-			{children}
-		</CheckListStatusProvider>
+		<HelpModalProvider>
+			<CheckListStatusProvider>
+				{children}
+			</CheckListStatusProvider>
+		</HelpModalProvider>
 	)
 }
 

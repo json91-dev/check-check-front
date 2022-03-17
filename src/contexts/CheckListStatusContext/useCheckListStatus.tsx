@@ -4,7 +4,7 @@ import { CheckListStatusProvider } from './context'
 const useCheckListStatus = () => {
 	const { state, dispatch } = useContext(CheckListStatusProvider)
 
-	const setData = array => {
+	const setData = (array: any) => {
 		dispatch({
 			type: 'SET_DATA',
 			payload: array,

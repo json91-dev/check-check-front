@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 5,
+    paddingTop: 20,
   },
 
   topNavigationTouch: {
@@ -28,37 +28,38 @@ const styles = StyleSheet.create({
   },
 
   progressBar: {
-    height: 20,
+    height: 10,
     flexDirection: "row",
     width: '100%',
-    backgroundColor: 'white',
-    borderColor: '#000',
-    borderWidth: 2,
-    borderRadius: 5
+    backgroundColor: '#EFEFEF',
+    marginTop: 10
   },
   titleImageView: {
     width: '100%',
-    height: 100,
+    height: 150,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
 
   titleImage: {
-    height: 100,
+    height: '100%',
     resizeMode: 'contain',
   },
 
+  titleScrollView: {
+    marginTop: 30
+  },
+
   titleView: {
-    marginTop: 20,
+    marginTop: 30,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   titleText: {
-    fontSize: 17,
-    color: 'black'
+    fontSize: 25,
+    color: '#0E0E0E',
   },
 
   checkBoxToggle: {

@@ -32,3 +32,10 @@ export interface HelpTopicsInterface {
   "id": number,
   "helpTopic": string
 }
+
+export interface HelpModalState {
+  isOpenModal: boolean,
+  helpTitle?: string,
+  helpDescription?: string,
+  helpTopics?: Array<HelpTopicsInterface>
+}

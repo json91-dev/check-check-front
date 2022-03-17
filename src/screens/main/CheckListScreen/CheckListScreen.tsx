@@ -96,10 +96,10 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
       </View>
 
       <View style={styles.progressBar}>
-        <Animated.View style={[StyleSheet.absoluteFill, {backgroundColor: "#8BED4F", width}]}/>
+        <Animated.View style={[StyleSheet.absoluteFill, {backgroundColor: "#3070D5", width}]}/>
       </View>
 
-      <ScrollView>
+      <ScrollView style={styles.titleScrollView}>
         <View style={styles.titleImageView}>
           <Image style={styles.titleImage} source={require('@assets/house.png')}/>
         </View>
@@ -111,7 +111,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
         {
           checkListSection.map((section: any, index: number) => {
             return (
-              <Section key={section.id + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} />
+              <Section key={section.id + section.sectionTitle + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} />
             )
           })
         }
@@ -145,7 +145,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
         />
       </ScrollView>
 
-      <HelpModal setShowModal={setShowModal} showModal={showModal}/>
+      <HelpModal />
 
     </View>
   )
