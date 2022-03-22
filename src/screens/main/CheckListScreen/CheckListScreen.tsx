@@ -25,12 +25,14 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
     subjectId = 1
   }
 
-  const { getCheckListByIdQuery } = useCheckList(undefined, subjectId);
-  const checkList = getCheckListByIdQuery?.data?.data;
-  const isLoading = getCheckListByIdQuery?.isFetching;
+  const { getCheckListBySubjectIdQuery } = useCheckList(undefined, subjectId);
+  const checkList = getCheckListBySubjectIdQuery?.data?.data;
+  const isLoading = getCheckListBySubjectIdQuery?.isFetching;
   const subTitle = checkList? checkList.subTitle: null;
   const imageUrl = checkList? checkList.imageUrl: null;
   const checkListSection = checkList? checkList.checkListSections: null;
+
+  console.log(checkList)
 
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);

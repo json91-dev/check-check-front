@@ -55,7 +55,7 @@ const DefaultActiveSection = ({setSectionState, setShowModal, sectionData, secti
       <View style={styles.imageView}>
         <Image style={styles.imageViewImage} source={require('@assets/circle_gray.png')} />
         <View style={styles.imageViewInnerView}>
-          <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>1</Text>
+          <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>{sectionIndex + 1}</Text>
         </View>
       </View>
 

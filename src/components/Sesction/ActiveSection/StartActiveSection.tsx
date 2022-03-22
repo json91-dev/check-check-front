@@ -54,7 +54,7 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
       <View style={styles.imageView}>
         <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
         <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>1</Text>
+          <Text style={styles.imageViewInnerViewText}>{sectionIndex + 1}</Text>
         </View>
       </View>
     </FadeInAnimationView>
