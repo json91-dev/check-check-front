@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const OnBoardStackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName = "MapScreen"
+      initialRouteName = "OnBoardLogin"
     >
       <Stack.Screen name="OnBoardPage1" options={{ headerShown: false}} component={OnBoardPage1}/>
       <Stack.Screen name="OnBoardPage2" options={{ headerShown: false}} component={OnBoardPage2}/>

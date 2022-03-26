@@ -22,7 +22,7 @@ module.exports = {
           '@screens': './src/screens',
           '@assets': './src/assets',
           '@query': './src/query',
-          // '@utils': './src/utils',
+          '@utils': './src/utils',
         },
       },
     ],
