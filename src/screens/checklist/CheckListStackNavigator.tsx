@@ -5,6 +5,8 @@ import CheckListScreen from '../main/CheckListScreen/CheckListScreen';
 const Stack = createNativeStackNavigator();
 
 const CheckListStackNavigator = () => {
+
+
   return (
     <Stack.Navigator
       initialRouteName = "CheckListScreen"

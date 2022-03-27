@@ -1,9 +1,11 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
 import {useCheckList} from "@query/checklist/useCheckList";
+import {getStorageUser, setStorageUser} from "@utils/hooks/useStorageUser";
+import {getAccessToken} from "@react-native-seoul/kakao-login";
 
 const RendingScreen = ({ navigation }: {navigation: any}) => {
   const {getCheckListSubjectsQuery} = useCheckList()
@@ -14,6 +16,23 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
   const onPressTouch = useCallback(() => {
     navigation.navigate('CheckListScreen', {subjectId: selectedSubjectId})
   }, [selectedSubjectIndex])
+
+  // TODO: 매 시작시 Access Token을 발급받고 갱신함
+  //       (연동하지 않고 시작하기 일때는 제외)
+  useEffect( () => {
+    (async () => {
+      const user: any = await getStorageUser();
+      if (user) {
+        const response: any = await getAccessToken()
+        const { token: newToken } = response.data;
+        await setStorageUser({
+          ...user,
+          token: newToken,
+        })
+        const returnUser = await getStorageUser()
+      }
+    })();
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>

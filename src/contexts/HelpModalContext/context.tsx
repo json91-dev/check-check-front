@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react'
-import {HelpModalState, HelpTopicsInterface} from "@query/queryInterface";
+import {HelpModalState, HelpTopicsInterface} from "@utils/interfaces/checkList";
 
 const initialState = {
   isOpenModal: false,

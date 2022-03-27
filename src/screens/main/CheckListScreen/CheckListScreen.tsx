@@ -7,9 +7,6 @@ import styles from './Styles';
 import Section from "@components/Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
 
-const totalIndex = 7;
-const currentIndex = 0;
-
 interface CheckListScreenProps {
   navigation: any,
   route: any

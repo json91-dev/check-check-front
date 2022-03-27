@@ -1,5 +1,7 @@
 export interface CheckListInterface {
   "id": number,
+  "email": string,
+  "subjectId": number
   "subjectTitle": string,
   "subTitle": string,
   "imageUrl": string,
@@ -14,11 +16,12 @@ export interface CheckListSectionInterface {
 
 export interface CheckListElementInterface {
   "id": number,
-  "elementName": string,
-  "subElements": Array<SubElementInterface>,
+  "elementTitle": string,
+  "checked": boolean,
   "helpTitle": string,
   "helpDescription": string,
-  "helpTopics": Array<HelpTopicsInterface>
+  "helpTopics": Array<HelpTopicsInterface>,
+  "subElements": Array<SubElementInterface>
 }
 
 export interface SubElementInterface {
@@ -33,9 +36,3 @@ export interface HelpTopicsInterface {
   "helpTopic": string
 }
 
-export interface HelpModalState {
-  isOpenModal: boolean,
-  helpTitle?: string,
-  helpDescription?: string,
-  helpTopics?: Array<HelpTopicsInterface>
-}

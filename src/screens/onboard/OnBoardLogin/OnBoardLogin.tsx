@@ -4,9 +4,9 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from "@react-native-google-signin/google-signin";
 import {KakaoOAuthToken, login, logout} from '@react-native-seoul/kakao-login';
 import styles from './Styles';
-import {getAccessTokenApi, setStorageToken} from "@utils/hooks/useStorageToken";
+import {getAccessTokenApi, setStorageUser} from "@utils/hooks/useStorageUser";
 
-const OnBoardLogin = () => {
+const OnBoardLogin = ({navigation}: {navigation: any}) => {
   const [loggedInGoogle, setLoggedInGoogle] = useState(false);
 
   const googleAuthChangeCallback = async (user: any) => {
@@ -17,15 +17,18 @@ const OnBoardLogin = () => {
         const { email } = user
 
         // 서버로부터 유저 토큰 정보 얻기
-        const response = await getAccessTokenApi(email, 'google')
-        const { accessToken } = response.data;
+        // const response = await getAccessTokenApi(email, 'google')
+        // const { accessToken } = response.data;
 
-        // AsyncStorage 유저 토큰 저장
-        const token = {
-          token: accessToken,
+        // AsyncStorage 유저 저장
+        const userInfo = {
+          // token: accessToken,
+          email,
+          provider: 'google'
         }
+        await setStorageUser(userInfo)
 
-        await setStorageToken(token)
+        navigation.replace('Main')
       } else {
         console.log('로그아웃');
       }
@@ -36,7 +39,7 @@ const OnBoardLogin = () => {
 
   /** Google **/
   useEffect(() => {
-    console.log('useEffect 수행')
+    console.log('222222')
     setLoggedInGoogle(false);
     // 구글 로그인 환경 설정
     GoogleSignin.configure({

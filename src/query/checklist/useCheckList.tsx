@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 import { useQuery } from 'react-query';
 import {defaultQueryOptions} from "@query/options";
-import {CheckListInterface} from "@query/queryInterface";
+import {CheckListInterface} from "@utils/interfaces/checkList";
 
 const baseUrl = 'http://158.247.192.7:8080/api/v1'
 

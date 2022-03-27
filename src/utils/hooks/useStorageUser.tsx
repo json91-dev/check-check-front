@@ -10,13 +10,13 @@ export const getAccessTokenApi = (email: string, provider: string) => {
 };
 
 // AsyncStorage get 함수 모듈
-const getStorageToken = async (storageName: string) => {
-  return getItemFromAsync('token')
+const getStorageUser = async () => {
+  return getItemFromAsync('user')
 };
 
 // AsyncStorage set 함수 모듈
-const setStorageToken = async (token: object) => {
- return await setItemToAsync('token', token)
+const setStorageUser = async (user: object) => {
+ return await setItemToAsync('user', user)
 };
 
-export {getStorageToken, setStorageToken}
+export {getStorageUser, setStorageUser}

@@ -1,13 +1,26 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect} from 'react';
 import OnBoardPage1 from './OnBoardPage1/OnBoardPage1';
 import OnBoardPage2 from './OnBoardPage2/OnBoardPage2';
 import OnBoardPage3 from './OnBoardPage3/OnBoardPage3';
 import OnBoardLogin from './OnBoardLogin/OnBoardLogin';
+import {getStorageUser} from "@utils/hooks/useStorageUser";
 
 const Stack = createNativeStackNavigator();
 
-const OnBoardStackNavigator = () => {
+const OnBoardStackNavigator = ({ navigation }: {navigation: any}) => {
+
+  useEffect(() => {
+    // 맨 처음 시작시 LocalStorage의 유저 체크 후 있으면 Main으로 이동
+    getStorageUser().then(user => {
+      console.log(user)
+      if (user) {
+        navigation.replace('Main')
+      }
+    })
+  }, [])
+
+
   return (
     <Stack.Navigator
       initialRouteName = "OnBoardLogin"

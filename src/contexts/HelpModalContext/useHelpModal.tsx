@@ -1,9 +1,16 @@
 import { useContext } from 'react'
 import { HelpModalContext } from './context'
-import {HelpModalState} from "@query/queryInterface";
+import { HelpTopicsInterface } from "@utils/interfaces/checkList";
+
+export interface HelpModalStateInterface {
+  isOpenModal: boolean,
+  helpTitle?: string,
+  helpDescription?: string,
+  helpTopics?: Array<HelpTopicsInterface>
+}
 
 interface useHelpModalInterface {
-  helpModalState: HelpModalState,
+  helpModalState: HelpModalStateInterface,
   setHelpModal: Function,
   openHelpModal: Function,
   closeHelpModal: Function
