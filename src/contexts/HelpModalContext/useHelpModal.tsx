@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { HelpModalContext } from './context'
-import { HelpTopicsInterface } from "@utils/interfaces/checkList";
+import { HelpTopicsInterface } from "@utils/interfaces/userCheckList";
 
 export interface HelpModalStateInterface {
   isOpenModal: boolean,

@@ -23,7 +23,7 @@ const OnBoardStackNavigator = ({ navigation }: {navigation: any}) => {
 
   return (
     <Stack.Navigator
-      initialRouteName = "OnBoardLogin"
+      initialRouteName = "OnBoardPage1"
     >
       <Stack.Screen name="OnBoardPage1" options={{ headerShown: false}} component={OnBoardPage1}/>
       <Stack.Screen name="OnBoardPage2" options={{ headerShown: false}} component={OnBoardPage2}/>

@@ -4,7 +4,7 @@ import React from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@components/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
-import {CheckListSectionInterface} from "@utils/interfaces/checkList";
+import {CheckListSectionInterface} from "@utils/interfaces/userCheckList";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 
 interface SectionProps {
@@ -24,13 +24,13 @@ const CompleteActiveSection = ({setSectionState, setShowModal, sectionData, sect
         <Text style={styles.leftViewTextTop}>{sectionTitle}</Text>
       </View>
 
-      {checkListElements.map(checkListElement => {
-        const {elementName, subElements, id} = checkListElement
+      {checkListElements?.map(checkListElement => {
+        const {elementTitle, subElements, id} = checkListElement
         return (
-          <View key={id + elementName} style={{width: '100%'}}>
+          <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>
               <CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>
-              <Text style={styles.elementViewText}>{elementName}</Text>
+              <Text style={styles.elementViewText}>{elementTitle}</Text>
               <TouchableOpacity style={styles.elementViewTouch} onPress={() => {
                 setHelpModal(checkListElement)
                 openHelpModal()

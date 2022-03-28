@@ -1,11 +1,18 @@
 import React, { createContext, useReducer } from 'react'
-import {HelpModalState, HelpTopicsInterface} from "@utils/interfaces/checkList";
+import {HelpTopicsInterface} from "@utils/interfaces/userCheckList";
+
+export interface HelpModalStateInterface {
+  isOpenModal: boolean,
+  helpTitle?: string,
+  helpDescription?: string,
+  helpTopics?: Array<HelpTopicsInterface>
+}
 
 const initialState = {
   isOpenModal: false,
 }
 
-const HelpModalContext = React.createContext<HelpModalState>(initialState)
+const HelpModalContext = React.createContext<HelpModalStateInterface>(initialState)
 const Provider: any = HelpModalContext.Provider
 
 const reducer: any = (state: any, action: any) => {

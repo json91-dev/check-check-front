@@ -6,6 +6,8 @@ import CheckBox from "@react-native-community/checkbox";
 import styles from './Styles';
 import Section from "@components/Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
+import {useUserCheckList} from "@query/userCheckList/useUserCheckList";
+import {CheckListInterface} from "@utils/interfaces/userCheckList";
 
 interface CheckListScreenProps {
   navigation: any,
@@ -22,14 +24,12 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
     subjectId = 1
   }
 
-  const { getCheckListBySubjectIdQuery } = useCheckList(undefined, subjectId);
-  const checkList = getCheckListBySubjectIdQuery?.data?.data;
-  const isLoading = getCheckListBySubjectIdQuery?.isFetching;
+  const { data: checkListData, isFetching } = useUserCheckList(subjectId)
+  const checkList: CheckListInterface = checkListData?.data;
+  const isLoading = isFetching;
   const subTitle = checkList? checkList.subTitle: null;
   const imageUrl = checkList? checkList.imageUrl: null;
   const checkListSection = checkList? checkList.checkListSections: null;
-
-  console.log(checkList)
 
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
@@ -108,7 +108,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
         </View>
 
         {
-          checkListSection.map((section: any, index: number) => {
+          checkListSection?.map((section: any, index: number) => {
             return (
               <Section key={section.id + section.sectionTitle + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} />
             )
