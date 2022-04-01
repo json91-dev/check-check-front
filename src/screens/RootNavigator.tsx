@@ -12,7 +12,7 @@ import {useEffect} from "react";
 
 const Stack = createNativeStackNavigator();
 
-const App = ({ navigation }: {navigation: any}) => {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="onBoard">

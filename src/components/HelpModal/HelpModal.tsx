@@ -2,9 +2,10 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from "react-nati
 import React from "react";
 import styles from './Styles';
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
+import {HelpTopicsInterface} from "@utils/interfaces/userCheckList";
 
 const HelpModal = () => {
-  const { helpModalState, closeHelpModal } = useHelpModal()
+  const { helpModalState, closeHelpModal }: any = useHelpModal()
   const { helpDescription, helpTopics, helpTitle} = helpModalState
   return (
     <Modal
@@ -12,12 +13,6 @@ const HelpModal = () => {
       hardwareAccelerated={true}
       transparent={true}
       visible={helpModalState.isOpenModal}
-      hideModalContentWhileAnimating={true}
-      useNativeDriverForBackdrop={true}
-      animationInTiming={3000}
-      animationOutTiming={3000}
-      backdropTransitionInTiming={3000}
-      backdropTransitionOutTiming={3000}
       onRequestClose={() => {
         // Alert.alert("Modal has been closed.");
         // setModalVisible(!modalVisible);
@@ -45,7 +40,7 @@ const HelpModal = () => {
             <Text style={styles.modalTopicTitleText}>비슷한 토픽</Text>
             <View style={styles.modalTopicListView}>
               {
-                helpTopics?.map((item) => {
+                helpTopics?.map((item: HelpTopicsInterface) => {
                   return (
                     <TouchableOpacity key={item.id + item.helpTopic} style={styles.modalTopicItemTouch}>
                       <Text style={styles.modalTopicItemText}>{item.helpTopic}</Text>
