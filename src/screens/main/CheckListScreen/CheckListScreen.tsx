@@ -4,7 +4,7 @@ import {useCheckList} from "@query/checklist/useCheckList";
 import Loading from "@components/Loading/Loading"
 import CheckBox from "@react-native-community/checkbox";
 import styles from './Styles';
-import Section from "@components/Sesction/Section";
+import Section from "./Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
 import {useUserCheckList} from "@query/userCheckList/useUserCheckList";
 import {CheckListInterface} from "@utils/interfaces/userCheckList";
@@ -17,7 +17,7 @@ interface CheckListScreenProps {
 const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
   const [showModal, setShowModal] = useState(true)
 
-  let subjectId;
+  let subjectId: number;
   if (route.params.subjectId) {
     subjectId = route.params.subjectId
   } else {
@@ -110,7 +110,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
         {
           checkListSection?.map((section: any, index: number) => {
             return (
-              <Section key={section.id + section.sectionTitle + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} />
+              <Section key={section.id + section.sectionTitle + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} subjectId={subjectId}/>
             )
           })
         }

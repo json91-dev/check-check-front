@@ -1,9 +1,9 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
-import React, {useCallback, useState} from "react";
+import React, {useCallback} from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/SubElement/SubElement";
-import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
+import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
+import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
 import {CheckListSectionInterface} from "@utils/interfaces/userCheckList";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 
@@ -12,18 +12,19 @@ interface SectionProps {
   setShowModal: Function,
   sectionData: CheckListSectionInterface,
   sectionIndex: number,
+  subjectId: number,
 }
 
-const StartActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
+const DefaultActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex, subjectId}: SectionProps) => {
   const {sectionTitle, checkListElements} = sectionData;
   const { setHelpModal, openHelpModal } = useHelpModal()
 
   const onChangeCheck = useCallback( () => {
-
   }, [])
 
   return (
-    <FadeInAnimationView containerStyle={styles.container}>
+    <FadeInAnimationView containerStyle={{...styles.container, borderColor: '#BABBBA'}}>
+
       <View style={styles.leftView}>
         <Text style={styles.leftViewTextTop}>{sectionTitle}</Text>
       </View>
@@ -34,6 +35,7 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>
               {/*<CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>*/}
+
               <CheckBox
                 disabled={false}
                 value={checked? checked : false}
@@ -63,13 +65,14 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
       })}
 
       <View style={styles.imageView}>
-        <Image style={styles.imageViewImage} source={require('@assets/circle_blue.png')} />
+        <Image style={styles.imageViewImage} source={require('@assets/circle_gray.png')} />
         <View style={styles.imageViewInnerView}>
-          <Text style={styles.imageViewInnerViewText}>{sectionIndex + 1}</Text>
+          <Text style={[styles.imageViewInnerViewText, {color: '#BABBBA'}]}>{sectionIndex + 1}</Text>
         </View>
       </View>
+
     </FadeInAnimationView>
   )
 }
 
-export default StartActiveSection;
+export default DefaultActiveSection;

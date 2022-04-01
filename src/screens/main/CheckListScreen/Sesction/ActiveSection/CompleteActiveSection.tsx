@@ -2,8 +2,8 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React, {useCallback} from "react";
 import CheckBox from "@react-native-community/checkbox";
-import SubElement from "@components/Sesction/SubElement/SubElement";
-import FadeInAnimationView from "@components/Sesction/ActiveSection/FadeInAnimationView";
+import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
+import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
 import {CheckListSectionInterface} from "@utils/interfaces/userCheckList";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 
@@ -12,9 +12,10 @@ interface SectionProps {
   setShowModal: Function,
   sectionData: CheckListSectionInterface,
   sectionIndex: number,
+  subjectId: number,
 }
 
-const CompleteActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
+const CompleteActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex, subjectId}: SectionProps) => {
   const {sectionTitle, checkListElements} = sectionData;
   const { setHelpModal, openHelpModal } = useHelpModal()
 
