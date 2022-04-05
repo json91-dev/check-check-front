@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react'
-import {HelpTopicsInterface} from "@utils/interfaces/userCheckList";
+import {HelpTopicsInterface} from "@interfaces/UserCheckListInterfaces";
 
 export interface HelpModalStateInterface {
   isOpenModal: boolean,

@@ -1,7 +1,7 @@
 import {Image, Text, View} from "react-native";
 import React from "react";
 import styles from './Styles';
-import {CheckListSectionInterface, SubElementInterface} from "@utils/interfaces/userCheckList";
+import {CheckListSectionInterface, SubElementInterface} from "@interfaces/UserCheckListInterfaces";
 
 interface SubElementProps {
   subElement: SubElementInterface,

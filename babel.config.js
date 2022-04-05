@@ -23,6 +23,7 @@ module.exports = {
           '@assets': './src/assets',
           '@query': './src/query',
           '@utils': './src/utils',
+          '@interfaces': './src/interfaces',
         },
       },
     ],

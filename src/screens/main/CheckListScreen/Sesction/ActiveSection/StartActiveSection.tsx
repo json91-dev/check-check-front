@@ -4,7 +4,7 @@ import React, {useCallback, useState} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
-import {CheckListSectionInterface} from "@utils/interfaces/userCheckList";
+import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 
 interface SectionProps {

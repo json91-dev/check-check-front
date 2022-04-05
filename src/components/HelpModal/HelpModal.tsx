@@ -2,7 +2,7 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from "react-nati
 import React from "react";
 import styles from './Styles';
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
-import {HelpTopicsInterface} from "@utils/interfaces/userCheckList";
+import {HelpTopicsInterface} from "@interfaces/UserCheckListInterfaces";
 
 const HelpModal = () => {
   const { helpModalState, closeHelpModal }: any = useHelpModal()

@@ -7,7 +7,7 @@ import styles from './Styles';
 import Section from "./Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
 import {useUserCheckList} from "@query/userCheckList/useUserCheckList";
-import {CheckListInterface} from "@utils/interfaces/userCheckList";
+import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 
 interface CheckListScreenProps {
   navigation: any,

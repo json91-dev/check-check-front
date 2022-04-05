@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 import { useQuery } from 'react-query';
 import {defaultQueryOptions} from "@query/options";
-import {CheckListInterface} from "@utils/interfaces/userCheckList";
+import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 
 const baseUrl = 'http://158.247.192.7:8080/api/v1'
 
@@ -28,7 +28,7 @@ export const useCheckList = (subjectTitle?: string, subjectId?: string) => {
 
   const getCheckListSubjectsQuery = useQuery('subjects', getCheckListSubjects, defaultQueryOptions)
 
-  const getCheckListBySubjectIdQuery = subjectId? useQuery<CheckListInterface | any>(`checkListSubject-${subjectId}`, getCheckListBySubjectId(subjectId), defaultQueryOptions) : null;
+  const getCheckListBySubjectIdQuery = subjectId? useQuery<CheckListInterface | any>([`checklist`, {subjectId}], getCheckListBySubjectId(subjectId), defaultQueryOptions) : null;
 
   return {
     getCheckListBySubTitleQuery,
