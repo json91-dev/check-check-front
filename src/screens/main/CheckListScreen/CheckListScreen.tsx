@@ -49,7 +49,6 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
     // };
   }, []);
 
-
   // 0~100 사이로 값을 입력받고 해당 값에 대한 애니메이션 수행
   const loadAnimation = (count: number) => {
     Animated.timing(loaderValue, {

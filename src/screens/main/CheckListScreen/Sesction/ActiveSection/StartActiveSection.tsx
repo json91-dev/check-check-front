@@ -6,6 +6,7 @@ import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubEle
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
 import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
+import {useUserCheckPost} from "@query/userCheckList/useUserCheckList";
 
 interface SectionProps {
   setSectionState: Function,
@@ -18,10 +19,11 @@ interface SectionProps {
 const StartActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex, subjectId}: SectionProps) => {
   const {sectionTitle, checkListElements} = sectionData;
   const { setHelpModal, openHelpModal } = useHelpModal()
+  const { userCheckMutation } = useUserCheckPost(subjectId);
 
-  const onChangeCheck = useCallback( () => {
-
-  }, [])
+  const onChangeCheck =  (id: any, checked: any) => {
+    userCheckMutation.mutate(id, checked)
+  }
 
   return (
     <FadeInAnimationView containerStyle={styles.container}>
@@ -31,6 +33,7 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
 
       {checkListElements.map(checkListElement => {
         const {elementTitle, subElements, id, checked} = checkListElement
+        console.log(checked)
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>
@@ -40,7 +43,7 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
                 value={checked? checked : false}
                 tintColors = {{ true: '#2658CB' , false: 'black' }}
                 style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
-                onChange={onChangeCheck}
+                onChange={() => onChangeCheck(id, checked)}
               />
               <Text style={styles.elementViewText}>{elementTitle}</Text>
               <TouchableOpacity style={styles.elementViewTouch} onPress={() => {
