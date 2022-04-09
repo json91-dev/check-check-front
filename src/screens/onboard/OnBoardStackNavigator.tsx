@@ -13,7 +13,6 @@ const OnBoardStackNavigator = ({ navigation }: {navigation: any}) => {
   useEffect(() => {
     // 맨 처음 시작시 LocalStorage의 유저 체크 후 있으면 Main으로 이동
     getStorageUser().then(user => {
-      console.log(user)
       if (user) {
         navigation.replace('Main')
       }

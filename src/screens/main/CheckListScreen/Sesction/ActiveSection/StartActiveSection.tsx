@@ -22,7 +22,10 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
   const { userCheckMutation } = useUserCheckPost(subjectId);
 
   const onChangeCheck =  (id: any, checked: any) => {
-    userCheckMutation.mutate(id, checked)
+    userCheckMutation.mutate({
+      id,
+      checked
+    })
   }
 
   return (
@@ -33,7 +36,6 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
 
       {checkListElements.map(checkListElement => {
         const {elementTitle, subElements, id, checked} = checkListElement
-        console.log(checked)
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>

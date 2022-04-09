@@ -24,8 +24,8 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
     subjectId = 1
   }
 
-  const { data: checkListData, isFetching } = useUserCheckList(subjectId)
-  const checkList: CheckListInterface = checkListData?.data;
+  const { data, isFetching } = useUserCheckList(subjectId)
+  const checkList: CheckListInterface = data;
   const isLoading = isFetching;
   const subTitle = checkList? checkList.subTitle: null;
   const imageUrl = checkList? checkList.imageUrl: null;

@@ -39,7 +39,6 @@ const OnBoardLogin = ({navigation}: {navigation: any}) => {
 
   /** Google **/
   useEffect(() => {
-    console.log('222222')
     setLoggedInGoogle(false);
     // 구글 로그인 환경 설정
     GoogleSignin.configure({
@@ -69,13 +68,12 @@ const OnBoardLogin = ({navigation}: {navigation: any}) => {
       // Step 3: 해당 권한을 이용하여,,,?
       return auth().signInWithCredential(googleCredential);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 
   const onKakaoButtonPress = async () => {
     const token: KakaoOAuthToken = await login();
-    console.log(JSON.stringify(token));
     Alert.alert('카카오 로그인', '로그인 성공');
     logout();
 
