@@ -6,7 +6,7 @@ import DefaultActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveS
 import CompleteSection from "@screens/main/CheckListScreen/Sesction/Section/CompleteSection";
 import CompleteActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/CompleteActiveSection";
 import {useQuery} from "react-query";
-import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 

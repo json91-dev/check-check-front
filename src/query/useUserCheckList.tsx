@@ -7,7 +7,7 @@ import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {defaultQueryOptions} from "@query/options";
 import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
 import {getStorageUser} from "@utils/hooks/useStorageUser";
-import {CheckListElementInterface} from "~/interfaces/UserCheckListInterfaces";
+import {CheckListElementInterface} from "@interfaces/UserCheckListInterfaces";
 import {CheckListInterface} from "@interfaces/CheckListInterfaces";
 
 /**
@@ -38,7 +38,7 @@ export const postUserCheckList: any = async (checkedData: any) => {
   const user: any = await getStorageUser()
   const token = user.token? user.token: '';
 
-  const updateChecked = !checkedData.cheked
+  const updateChecked = !checkedData.checked
 
   const data = {
     elementId: checkedData.id,
@@ -46,6 +46,8 @@ export const postUserCheckList: any = async (checkedData: any) => {
   }
 
   const response = await axiosInstance.put(`/user/checklist`, data ,{ headers: getJWTHeader(token) })
+  console.log(data)
+  console.log(response.data)
 
   return response.data
 }

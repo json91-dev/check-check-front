@@ -3,7 +3,7 @@ import styles from "./Styles";
 import React from "react";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 import {useQuery} from "react-query";
-import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {

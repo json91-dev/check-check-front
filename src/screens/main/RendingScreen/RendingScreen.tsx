@@ -3,10 +3,10 @@ import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'reac
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
-import {useCheckList} from "@query/checklist/useCheckList";
+import {useCheckList} from "@query/useCheckList";
 import {getAccessTokenApi, getStorageUser, setStorageUser} from "@utils/hooks/useStorageUser";
 import {getAccessToken} from "@react-native-seoul/kakao-login";
-import {useCheckListSubject} from "@query/userCheckList/useUserCheckList";
+import {useCheckListSubject} from "@query/useUserCheckList";
 
 const RendingScreen = ({ navigation }: {navigation: any}) => {
   const {data: subjectData, status} = useCheckListSubject()

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import Section from "@screens/main/CheckListScreen/Sesction/Section";
-import {getUserCheckListBySubjectId, useUserCheckList} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId, useUserCheckList} from "@query/useUserCheckList";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 import {useQuery} from "react-query";
 import {defaultQueryOptions} from "@query/options";

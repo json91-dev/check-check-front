@@ -7,7 +7,7 @@ import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSe
 import {CheckListInterface, CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 import {useQuery} from "react-query";
-import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {

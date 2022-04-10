@@ -6,7 +6,7 @@ import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubEle
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
 import {CheckListInterface, CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
-import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/useUserCheckList";
 import {useQuery} from "react-query";
 import {defaultQueryOptions} from "@query/options";
 
@@ -27,6 +27,8 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
   const { userCheckMutation } = useUserCheckPost(subjectId);
 
   const onChangeCheck =  (id: any, checked: any) => {
+    console.log(checked)
+
     userCheckMutation.mutate({
       id,
       checked
@@ -50,7 +52,7 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
                 value={checked? checked : false}
                 tintColors = {{ true: '#2658CB' , false: 'black' }}
                 style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
-                onChange={() => onChangeCheck(id, checked)}
+                onChange={(e) => onChangeCheck(id, checked)}
               />
               <Text style={styles.elementViewText}>{elementTitle}</Text>
               <TouchableOpacity style={styles.elementViewTouch} onPress={() => {
