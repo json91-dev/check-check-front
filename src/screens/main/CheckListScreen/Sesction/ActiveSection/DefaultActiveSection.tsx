@@ -4,8 +4,11 @@ import React, {useCallback} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
-import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
+import {CheckListInterface, CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
+import {useQuery} from "react-query";
+import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
   setSectionState: Function,
@@ -15,8 +18,11 @@ interface SectionProps {
   subjectId: number,
 }
 
-const DefaultActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex, subjectId}: SectionProps) => {
-  const {sectionTitle, checkListElements} = sectionData;
+const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) => {
+  const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const checkList: CheckListInterface = data;
+  const checkListSections = checkList.checkListSections
+  const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
 
   const onChangeCheck = useCallback( () => {
@@ -73,6 +79,6 @@ const DefaultActiveSection = ({setSectionState, setShowModal, sectionData, secti
 
     </FadeInAnimationView>
   )
-}
+})
 
 export default DefaultActiveSection;

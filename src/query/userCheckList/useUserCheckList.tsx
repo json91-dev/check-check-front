@@ -13,7 +13,7 @@ import {CheckListInterface} from "@interfaces/CheckListInterfaces";
 /**
  * 모든 체크리스트의 주제를 가져옴.
  */
-const getCheckListSubjects = () => {
+export const getCheckListSubjects = () => {
   return axiosInstance.get('/checklist/subjects')
 };
 
@@ -21,7 +21,7 @@ const getCheckListSubjects = () => {
  * SubjectId(주제)를 통해 유저에 대한 해당 주제의 체크리스트 조회.
  * @param subjectId
  */
-const getUserCheckListBySubjectId = (subjectId: number) => async () => {
+export const getUserCheckListBySubjectId = (subjectId: number) => async () => {
   const user: any = await getStorageUser()
   const token = user.token? user.token: '';
   const response = await axiosInstance.get(`/user/checklist?subjectId=${subjectId}`, { headers: getJWTHeader(token) })
@@ -34,7 +34,7 @@ const getUserCheckListBySubjectId = (subjectId: number) => async () => {
  * @param elementId
  * @param checked
  */
-const postUserCheckList: any = async (checkedData: any) => {
+export const postUserCheckList: any = async (checkedData: any) => {
   const user: any = await getStorageUser()
   const token = user.token? user.token: '';
 
@@ -55,7 +55,7 @@ const postUserCheckList: any = async (checkedData: any) => {
  * @param subjectId
  */
 export const useUserCheckList = (subjectId: number) => {
-  const {data, status, isFetching} = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const { data, status, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
 
   return {
     data,
@@ -89,17 +89,17 @@ export const useUserCheckPost = (subjectId: number) => {
 
       const elementId = checkedData.id;
 
-      // Step 1: 기존 checklist에 대한 query를
+      // 기존 checklist에 대한 query를 가져옴
       await queryClient.cancelQueries([`checklist`, {subjectId}])
       const checkListQuery: any = queryClient.getQueryData([`checklist`, {subjectId}])
 
       const prevCheckList: any = checkListQuery;
       const prevCheckListSections = prevCheckList.checkListSections;
 
+      // 체크 적용
       for (const checkListSection of prevCheckListSections) {
         for (const checkListElement of checkListSection.checkListElements) {
           if (checkListElement.id === elementId) {
-
             checkListElement.checked = !checkListElement.checked
           }
         }

@@ -4,9 +4,11 @@ import React, {useCallback, useState} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
-import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
+import {CheckListInterface, CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
-import {useUserCheckPost} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/userCheckList/useUserCheckList";
+import {useQuery} from "react-query";
+import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
   setSectionState: Function,
@@ -16,8 +18,11 @@ interface SectionProps {
   subjectId: number,
 }
 
-const StartActiveSection = ({setSectionState, setShowModal, sectionData, sectionIndex, subjectId}: SectionProps) => {
-  const {sectionTitle, checkListElements} = sectionData;
+const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) => {
+  const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const checkList: CheckListInterface = data;
+  const checkListSections = checkList.checkListSections
+  const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
   const { userCheckMutation } = useUserCheckPost(subjectId);
 
@@ -76,6 +81,6 @@ const StartActiveSection = ({setSectionState, setShowModal, sectionData, section
       </View>
     </FadeInAnimationView>
   )
-}
+})
 
 export default StartActiveSection;

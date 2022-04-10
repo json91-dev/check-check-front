@@ -1,17 +1,23 @@
 import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React, {useEffect, useRef, useState} from "react";
-import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
+import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
+import {useQuery} from "react-query";
+import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
   setSectionState: Function,
   setShowModal: Function,
-  sectionData: CheckListSectionInterface,
   sectionIndex: number,
+  subjectId: number
 }
 
-const StartSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
-  const {sectionTitle, checkListElements} = sectionData
+const StartSection = React.memo(({setSectionState, sectionIndex, subjectId}: SectionProps) => {
+  const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const checkList: CheckListInterface = data;
+  const checkListSections = checkList.checkListSections
+  const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
 
   return (
     <Animated.View style={[styles.container]}>
@@ -32,6 +38,6 @@ const StartSection = ({setSectionState, setShowModal, sectionData, sectionIndex}
       </View>
     </Animated.View>
   )
-}
+})
 
 export default StartSection;

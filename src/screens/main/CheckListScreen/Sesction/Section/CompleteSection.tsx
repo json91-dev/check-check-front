@@ -1,17 +1,23 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
 import React from "react";
-import {CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
+import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
+import {useQuery} from "react-query";
+import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
   setSectionState: Function,
   setShowModal: Function,
-  sectionData: CheckListSectionInterface,
   sectionIndex: number,
+  subjectId: number
 }
 
-const CompleteSection = ({setSectionState, setShowModal, sectionData, sectionIndex}: SectionProps) => {
-  const {sectionTitle, checkListElements} = sectionData
+const CompleteSection = React.memo(({setSectionState,sectionIndex, subjectId }: SectionProps) => {
+  const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const checkList: CheckListInterface = data;
+  const checkListSections = checkList.checkListSections
+  const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   return (
     <View style={[styles.container, {borderColor: '#2D9929'}]}>
       <View style={styles.leftView}>
@@ -28,6 +34,6 @@ const CompleteSection = ({setSectionState, setShowModal, sectionData, sectionInd
       </View>
     </View>
   )
-}
+})
 
 export default CompleteSection;

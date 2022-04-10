@@ -6,8 +6,11 @@ import CheckBox from "@react-native-community/checkbox";
 import styles from './Styles';
 import Section from "./Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
-import {useUserCheckList} from "@query/userCheckList/useUserCheckList";
+import {getUserCheckListBySubjectId, useUserCheckList} from "@query/userCheckList/useUserCheckList";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
+import SectionManager from "@screens/main/CheckListScreen/Sesction/SectionManager";
+import {useQuery} from "react-query";
+import {defaultQueryOptions} from "@query/options";
 
 interface CheckListScreenProps {
   navigation: any,
@@ -24,7 +27,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
     subjectId = 1
   }
 
-  const { data, isFetching } = useUserCheckList(subjectId)
+  const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkList: CheckListInterface = data;
   const isLoading = isFetching;
   const subTitle = checkList? checkList.subTitle: null;
@@ -78,6 +81,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
   }, [checkBoxValues]);
 
   if (isLoading) {
+    console.log('111')
     return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
   }
 
@@ -106,13 +110,8 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
           <Text style={styles.titleText}>{subTitle}</Text>
         </View>
 
-        {
-          checkListSection?.map((section: any, index: number) => {
-            return (
-              <Section key={section.id + section.sectionTitle + index} setShowModal={setShowModal} sectionData={section} sectionIndex={index} subjectId={subjectId}/>
-            )
-          })
-        }
+
+        <SectionManager subjectId={subjectId} setShowModal={setShowModal}/>
 
         <CheckBox
           disabled={false}

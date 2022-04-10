@@ -5,6 +5,10 @@ import DefaultSection from "@screens/main/CheckListScreen/Sesction/Section/Defau
 import DefaultActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/DefaultActiveSection";
 import CompleteSection from "@screens/main/CheckListScreen/Sesction/Section/CompleteSection";
 import CompleteActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/CompleteActiveSection";
+import {useQuery} from "react-query";
+import {getUserCheckListBySubjectId} from "@query/userCheckList/useUserCheckList";
+import {defaultQueryOptions} from "@query/options";
+import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 
 interface SectionProps {
   setShowModal: Function,
@@ -13,34 +17,35 @@ interface SectionProps {
   subjectId: number
 }
 
-const Section = ({setShowModal, sectionData, sectionIndex, subjectId}: SectionProps ) => {
+const Section = ({setShowModal, sectionData, sectionIndex, subjectId, }: SectionProps ) => {
   // start, startActive, default, defaultActive, complete, completeActive
   const [sectionState, setSectionState] = useState('complete')
+  const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
 
   const onPressSectionState = useCallback((state) => () => {
-    setSectionState(state)
+    setSectionState(sectionState)
   }, [sectionState])
 
   useEffect(() => {
-    setSectionState('start')
+    setSectionState('startActive')
   }, [])
 
   switch (sectionState) {
     case 'start': {
       return (
-        <StartSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <StartSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
       )
     }
 
     case 'default': {
       return (
-        <DefaultSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <DefaultSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
       )
     }
 
     case 'complete': {
       return (
-        <CompleteSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal}/>
+        <CompleteSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
       )
     }
 
