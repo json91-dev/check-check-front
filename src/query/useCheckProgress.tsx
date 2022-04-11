@@ -2,7 +2,7 @@ import {useQuery} from "react-query";
 import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 
-const getTotalChecked = (checkList) => {
+const getTotalChecked = (checkList: any) => {
   const {checkListSections} = checkList
   let total = 0;
   let current = 0;
@@ -19,7 +19,7 @@ const getTotalChecked = (checkList) => {
   return {total, current}
 }
 
-const useCheckProgress = (subjectId) => {
+const useCheckProgress = (subjectId: any) => {
   const { data: checkList, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
 
   if (checkList) {

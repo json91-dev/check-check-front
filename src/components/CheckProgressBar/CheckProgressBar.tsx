@@ -1,19 +1,15 @@
-import {Animated, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Animated, StyleSheet, View} from "react-native";
 import React, {useCallback, useEffect, useRef} from "react";
 import styles from './Styles';
-import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
-import {HelpTopicsInterface} from "@interfaces/UserCheckListInterfaces";
 
-const CheckProgressBar = ({current, total}) => {
+const CheckProgressBar = ({current, total}: any) => {
   const loaderValue = useRef(new Animated.Value(0)).current;
-  console.log(loaderValue)
   const width = loaderValue.interpolate({
     inputRange: [0, 100],
     outputRange: ["0%", "100%"],
     extrapolate: "clamp"
   });
 
-  console.log(loaderValue)
 
   // 0~100 사이로 값을 입력받고 해당 값에 대한 애니메이션 수행
   const loadAnimation = useCallback((count: number) => {

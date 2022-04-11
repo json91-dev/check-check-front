@@ -11,9 +11,6 @@ import {useQuery} from "react-query";
 import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
-  setSectionState: Function,
-  setShowModal: Function,
-  sectionData: CheckListSectionInterface,
   sectionIndex: number,
   subjectId: number,
 }
@@ -25,6 +22,7 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
   const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
   const { userCheckMutation } = useUserCheckPost(subjectId);
+  console.log('startActiveSection')
 
   const onChangeCheck =  (id: any, checked: any) => {
     console.log(checked)
@@ -43,6 +41,8 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
 
       {checkListElements.map(checkListElement => {
         const {elementTitle, subElements, id, checked} = checkListElement
+        console.log('checkListElement')
+        console.log(id + elementTitle)
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>

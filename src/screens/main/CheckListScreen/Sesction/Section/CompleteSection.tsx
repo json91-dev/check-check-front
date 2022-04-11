@@ -8,7 +8,6 @@ import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
   setSectionState: Function,
-  setShowModal: Function,
   sectionIndex: number,
   subjectId: number
 }

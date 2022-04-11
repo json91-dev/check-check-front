@@ -7,7 +7,7 @@ import {defaultQueryOptions} from "@query/options";
 import {getStorageUser} from "@utils/hooks/useStorageUser";
 import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
 
-const SectionManager = React.memo(({subjectId, setShowModal}) => {
+const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
   const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkList: CheckListInterface = data;
 
@@ -24,7 +24,7 @@ const SectionManager = React.memo(({subjectId, setShowModal}) => {
 
         // 만약에 false가 하나라도 있는 경우
         if (index > -1) {
-          if (updateSectionState.findIndex(item => item === 'start') === -1) {
+          if (updateSectionState.findIndex((item : string) => item === 'start') === -1) {
             updateSectionState.push('start')
           } else {
             updateSectionState.push('default')
@@ -37,8 +37,6 @@ const SectionManager = React.memo(({subjectId, setShowModal}) => {
         }
       })
     }
-
-    console.log(updateSectionState)
 
     // 섹션에 대한 체크 상태를 저장함.
     const updateSectionChecked: any = []
@@ -55,9 +53,6 @@ const SectionManager = React.memo(({subjectId, setShowModal}) => {
         updateSectionChecked.push(sectionCheckedObject)
       })
     }
-
-    console.log(updateSectionChecked)
-
   }, [checkListSections])
 
   if (sectionState) {
@@ -68,11 +63,8 @@ const SectionManager = React.memo(({subjectId, setShowModal}) => {
             return (
               <Section
                 key={section.id + section.sectionTitle + index}
-                setShowModal={setShowModal}
-                sectionData={section}
                 sectionIndex={index}
                 subjectId={subjectId}
-                sectionState={sectionState[index]}
               />
             )
           })

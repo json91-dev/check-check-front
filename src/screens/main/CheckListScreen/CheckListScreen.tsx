@@ -48,7 +48,6 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
   }, []);
 
   if (isLoading) {
-    console.log('111')
     return <Loading text="필요한 체크리스트를 불러오고 있어요..."/>
   }
 

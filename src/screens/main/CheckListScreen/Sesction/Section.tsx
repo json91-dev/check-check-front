@@ -5,65 +5,58 @@ import DefaultSection from "@screens/main/CheckListScreen/Sesction/Section/Defau
 import DefaultActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/DefaultActiveSection";
 import CompleteSection from "@screens/main/CheckListScreen/Sesction/Section/CompleteSection";
 import CompleteActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/CompleteActiveSection";
-import {useQuery} from "react-query";
-import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
-import {defaultQueryOptions} from "@query/options";
-import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 
 interface SectionProps {
-  setShowModal: Function,
-  sectionData: any,
   sectionIndex: number,
   subjectId: number
 }
 
-const Section = ({setShowModal, sectionData, sectionIndex, subjectId, }: SectionProps ) => {
+const Section = ({ sectionIndex, subjectId}: SectionProps ) => {
   // start, startActive, default, defaultActive, complete, completeActive
-  const [sectionState, setSectionState] = useState('complete')
-  const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const [sectionState, setSectionState] = useState('startActive')
 
   const onPressSectionState = useCallback((state) => () => {
     setSectionState(sectionState)
   }, [sectionState])
 
   useEffect(() => {
-    setSectionState('startActive')
+    // setSectionState('startActive')
   }, [])
 
   switch (sectionState) {
     case 'start': {
       return (
-        <StartSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
+        <StartSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
       )
     }
 
     case 'default': {
       return (
-        <DefaultSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
+        <DefaultSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
       )
     }
 
     case 'complete': {
       return (
-        <CompleteSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
+        <CompleteSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
       )
     }
 
     case 'startActive': {
       return (
-        <StartActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId}/>
+        <StartActiveSection  sectionIndex={sectionIndex} subjectId={subjectId} />
       )
     }
 
     case 'defaultActive': {
       return (
-        <DefaultActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId} />
+        <DefaultActiveSection sectionIndex={sectionIndex}  subjectId={subjectId} />
       );
     }
 
     case 'completeActive': {
       return (
-        <CompleteActiveSection setSectionState={onPressSectionState} sectionData={sectionData} sectionIndex={sectionIndex} setShowModal={setShowModal} subjectId={subjectId} />
+        <CompleteActiveSection sectionIndex={sectionIndex}  subjectId={subjectId} />
       );
     }
 

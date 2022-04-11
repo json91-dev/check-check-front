@@ -11,9 +11,6 @@ import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
-  setSectionState: Function,
-  setShowModal: Function,
-  sectionData: CheckListSectionInterface,
   sectionIndex: number,
   subjectId: number,
 }

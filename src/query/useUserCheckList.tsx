@@ -46,8 +46,8 @@ export const postUserCheckList: any = async (checkedData: any) => {
   }
 
   const response = await axiosInstance.put(`/user/checklist`, data ,{ headers: getJWTHeader(token) })
-  console.log(data)
-  console.log(response.data)
+  console.log(response)
+
 
   return response.data
 }
@@ -93,29 +93,35 @@ export const useUserCheckPost = (subjectId: number) => {
 
       // 기존 checklist에 대한 query를 가져옴
       await queryClient.cancelQueries([`checklist`, {subjectId}])
-      const checkListQuery: any = queryClient.getQueryData([`checklist`, {subjectId}])
+      const checkList: any = queryClient.getQueryData([`checklist`, {subjectId}])
 
-      const prevCheckList: any = checkListQuery;
-      const prevCheckListSections = prevCheckList.checkListSections;
+      const newCheckListSections = [
+        ...checkList.checkListSections,
+      ];
 
-      // 체크 적용
-      for (const checkListSection of prevCheckListSections) {
-        for (const checkListElement of checkListSection.checkListElements) {
+      newCheckListSections.forEach((checkListSection) => {
+        checkListSection = {...checkListSection}
+        checkListSection.checkListElements.forEach((checkListElement: any) => {
+          checkListElement = {...checkListElement}
           if (checkListElement.id === elementId) {
             checkListElement.checked = !checkListElement.checked
           }
-        }
-      }
+        })
+      })
 
       const updatedCheckList = {
-        ...prevCheckList,
+        ...checkList,
+        checkListSections: [
+          ...newCheckListSections
+        ]
       }
 
       // TODO: 현재 체크된 Element의 체크값만 바꿔서 갱신한다.
       await queryClient.setQueryData([`checklist`, {subjectId}], updatedCheckList);
 
+
       return {
-        prevCheckList,
+        checkList,
         subjectId,
       }
     },
