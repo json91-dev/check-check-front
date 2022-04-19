@@ -1,14 +1,8 @@
-import axios from 'axios';
-// import {CheckListInterface} from "@utils/interfaces/checkList";
-// import {getAccessToken} from "@react-native-seoul/kakao-login";
-// import {getStorageUser} from "@utils/hooks/useStorageUser";
 
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {defaultQueryOptions} from "@query/options";
 import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
 import {getStorageUser} from "@utils/hooks/useStorageUser";
-import {CheckListElementInterface} from "@interfaces/UserCheckListInterfaces";
-import {CheckListInterface} from "@interfaces/CheckListInterfaces";
 
 /**
  * 모든 체크리스트의 주제를 가져옴.
@@ -31,8 +25,7 @@ export const getUserCheckListBySubjectId = (subjectId: number) => async () => {
 
 /**
  * 유저의 체크리스트 항목의 체크상태 update.
- * @param elementId
- * @param checked
+ * @param checkedData
  */
 export const postUserCheckList: any = async (checkedData: any) => {
   const user: any = await getStorageUser()
@@ -84,44 +77,29 @@ export const useCheckListSubject = () => {
  */
 export const useUserCheckPost = (subjectId: number) => {
   const queryClient = useQueryClient()
-
   // @ts-ignore
   const userCheckMutation = useMutation((checkedData) => postUserCheckList(checkedData), {
     onMutate: async (checkedData: any) => {
-
       const elementId = checkedData.id;
 
       // 기존 checklist에 대한 query를 가져옴
       await queryClient.cancelQueries([`checklist`, {subjectId}])
       const checkList: any = queryClient.getQueryData([`checklist`, {subjectId}])
 
-      const newCheckListSections = [
-        ...checkList.checkListSections,
-      ];
-
-      newCheckListSections.forEach((checkListSection) => {
-        checkListSection = {...checkListSection}
-        checkListSection.checkListElements.forEach((checkListElement: any) => {
-          checkListElement = {...checkListElement}
-          if (checkListElement.id === elementId) {
-            checkListElement.checked = !checkListElement.checked
-          }
+      const updatedCheckList = {...checkList}
+      updatedCheckList.checkListSections.forEach((checkListSection) => {
+        checkListSection.checkListElements.forEach(checkListElement => {
+            if (checkListElement.id === elementId) {
+              checkListElement.checked = !checkListElement.checked
+            }
         })
       })
-
-      const updatedCheckList = {
-        ...checkList,
-        checkListSections: [
-          ...newCheckListSections
-        ]
-      }
 
       // TODO: 현재 체크된 Element의 체크값만 바꿔서 갱신한다.
       await queryClient.setQueryData([`checklist`, {subjectId}], updatedCheckList);
 
-
       return {
-        checkList,
+        // checkList,
         subjectId,
       }
     },
@@ -129,9 +107,9 @@ export const useUserCheckPost = (subjectId: number) => {
     onError: (error, data, { prevCheckList}: any) => {
       // queryClient.setQueryData([`checklist`, {subjectId}], prevCheckList);
     },
-    onSuccess: (error, data, context) => {
-      // queryClient.invalidateQueries([`checklist`, {subjectId}]);
-    },
+    // onSuccess: (error, data, context) => {
+    //   // queryClient.invalidateQueries([`checklist`, {subjectId}]);
+    // },
   })
 
   return { userCheckMutation }

@@ -16,17 +16,16 @@ interface SectionProps {
 }
 
 const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) => {
-  const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const { data, isLoading  } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const { userCheckMutation } = useUserCheckPost(subjectId);
   const checkList: CheckListInterface = data;
   const checkListSections = checkList.checkListSections
   const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
-  const { userCheckMutation } = useUserCheckPost(subjectId);
-  console.log('startActiveSection')
+
+  // console.log(checkList.checkListSections[0].checkListElements[0].checked)
 
   const onChangeCheck =  (id: any, checked: any) => {
-    console.log(checked)
-
     userCheckMutation.mutate({
       id,
       checked
@@ -41,8 +40,8 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
 
       {checkListElements.map(checkListElement => {
         const {elementTitle, subElements, id, checked} = checkListElement
-        console.log('checkListElement')
-        console.log(id + elementTitle)
+        // console.log(`checkListElement 리렌더링 "${elementTitle}" ${checked}`)
+        // console.log('----')
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>

@@ -3,9 +3,7 @@ import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'reac
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
-import {useCheckList} from "@query/useCheckList";
 import {getAccessTokenApi, getStorageUser, setStorageUser} from "@utils/hooks/useStorageUser";
-import {getAccessToken} from "@react-native-seoul/kakao-login";
 import {useCheckListSubject} from "@query/useUserCheckList";
 
 const RendingScreen = ({ navigation }: {navigation: any}) => {
@@ -53,6 +51,7 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
           contentContainerStyle={styles.flatListContent}
           renderItem={({item, index}) => {
             return <IconButton
+              key={item.subjectId + item.subjectTitle}
               source={{uri: 'https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg'}}
               subject={item}
               index={index}
@@ -62,9 +61,7 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
               setSelectedSubjectId={setSelectedSubjectId}
             />
           }}
-
           numColumns={2}
-          keyExtractor={(item, index) => index + item.source}
         /> : null
       }
 
