@@ -23,8 +23,6 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
   const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
 
-  // console.log(checkList.checkListSections[0].checkListElements[0].checked)
-
   const onChangeCheck =  (id: any, checked: any) => {
     userCheckMutation.mutate({
       id,
@@ -40,12 +38,9 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
 
       {checkListElements.map(checkListElement => {
         const {elementTitle, subElements, id, checked} = checkListElement
-        // console.log(`checkListElement 리렌더링 "${elementTitle}" ${checked}`)
-        // console.log('----')
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>
-              {/*<CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>*/}
               <CheckBox
                 disabled={false}
                 value={checked? checked : false}

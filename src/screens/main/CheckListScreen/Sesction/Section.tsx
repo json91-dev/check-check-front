@@ -8,20 +8,25 @@ import CompleteActiveSection from "@screens/main/CheckListScreen/Sesction/Active
 
 interface SectionProps {
   sectionIndex: number,
-  subjectId: number
+  subjectId: number,
+  sectionState: string,
 }
 
-const Section = ({ sectionIndex, subjectId}: SectionProps ) => {
+const Section = ({ sectionIndex, subjectId, sectionState}: SectionProps ) => {
   // start, startActive, default, defaultActive, complete, completeActive
-  const [sectionState, setSectionState] = useState('startActive')
+  // const [sectionState, setSectionState] = useState('startActive')
+  //
+  // // const onPressSectionState = useCallback((state) => () => {
+  // //   setSectionState(sectionState)
+  // // }, [sectionState])
+  //
+  // useEffect(() => {
+  //   // setSectionState('startActive')
+  // }, [])
 
-  const onPressSectionState = useCallback((state) => () => {
-    setSectionState(sectionState)
-  }, [sectionState])
+  const setSectionState = () => {
 
-  useEffect(() => {
-    // setSectionState('startActive')
-  }, [])
+  }
 
   switch (sectionState) {
     case 'start': {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState, useCallback, useRef} from 'react';
 import Section from "@screens/main/CheckListScreen/Sesction/Section";
 import {getUserCheckListBySubjectId, useUserCheckList} from "@query/useUserCheckList";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
@@ -10,52 +10,54 @@ import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
 const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
   const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkList: CheckListInterface = data;
-
   const checkListSections = checkList? checkList.checkListSections: null;
-  const [sectionState, setSectionState] = useState([])
+  const [sectionStates, setSectionStates] = useState([])
   const [sectionChecked, setSectionChecked] = useState([])
+  const sectionStateRef: any = useRef([]);
 
   useEffect(() => {
-    // 현재 섹션의 상태를 배열로 저장함.
-    const updateSectionState: any = []
+    // 초기 상태 저장
     if (checkListSections) {
+      const updatedSectionStates: any = []
+      console.log(checkListSections)
       checkListSections.forEach((section, num) => {
         const index = section.checkListElements.findIndex(item => !item.checked)
-
-        // 만약에 false가 하나라도 있는 경우
         if (index > -1) {
-          if (updateSectionState.findIndex((item : string) => item === 'start') === -1) {
-            updateSectionState.push('start')
+          const index = updatedSectionStates.findIndex((item : string) => item === 'start')
+          if (index === -1) {
+            updatedSectionStates.push('start')
           } else {
-            updateSectionState.push('default')
+            updatedSectionStates.push('default')
           }
-        }
-
-        // false가 아예 없는 경우
-        else {
-          updateSectionState.push('complete')
+        } else {
+          updatedSectionStates.push('complete')
         }
       })
+
+      console.log(updatedSectionStates)
+      setSectionStates(updatedSectionStates)
+    } else {
+
     }
 
-    // 섹션에 대한 체크 상태를 저장함.
-    const updateSectionChecked: any = []
-    if (checkListSections) {
-      checkListSections.forEach((section) => {
-        const sectionCheckedObject: any = {
-          id: section.id,
-          checked: [],
-        };
-        section.checkListElements.forEach((element) => {
-          sectionCheckedObject.checked.push(element.checked)
-        })
-
-        updateSectionChecked.push(sectionCheckedObject)
-      })
-    }
+    // // 섹션에 대한 체크 상태를 저장함.
+    // const updateSectionChecked: any = []
+    // if (checkListSections) {
+    //   checkListSections.forEach((section) => {
+    //     const sectionCheckedObject: any = {
+    //       id: section.id,
+    //       checked: [],
+    //     };
+    //     section.checkListElements.forEach((element) => {
+    //       sectionCheckedObject.checked.push(element.checked)
+    //     })
+    //
+    //     updateSectionChecked.push(sectionCheckedObject)
+    //   })
+    // }
   }, [checkListSections])
 
-  if (sectionState) {
+  if (sectionStates.length > 0) {
     return (
       <>
         {
@@ -65,6 +67,7 @@ const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
                 key={section.id + section.sectionTitle + index}
                 sectionIndex={index}
                 subjectId={subjectId}
+                sectionState={sectionStates[index]}
               />
             )
           })

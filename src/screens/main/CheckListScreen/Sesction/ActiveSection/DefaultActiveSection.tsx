@@ -7,7 +7,7 @@ import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSe
 import {CheckListInterface, CheckListSectionInterface} from "@interfaces/UserCheckListInterfaces";
 import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 import {useQuery} from "react-query";
-import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
+import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
 
 interface SectionProps {
@@ -17,12 +17,17 @@ interface SectionProps {
 
 const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) => {
   const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
+  const { userCheckMutation } = useUserCheckPost(subjectId);
   const checkList: CheckListInterface = data;
   const checkListSections = checkList.checkListSections
   const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
 
-  const onChangeCheck = useCallback( () => {
+  const onChangeCheck = useCallback( (id: any, checked: any) => {
+    userCheckMutation.mutate({
+      id,
+      checked
+    })
   }, [])
 
   return (
@@ -37,14 +42,12 @@ const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
             <View style={styles.elementView}>
-              {/*<CheckBox style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}/>*/}
-
               <CheckBox
                 disabled={false}
                 value={checked? checked : false}
                 tintColors = {{ true: '#2658CB' , false: 'black' }}
                 style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] , marginLeft: 4}}
-                onChange={onChangeCheck}
+                onChange={() => onChangeCheck(id, checked)}
               />
               <Text style={styles.elementViewText}>{elementTitle}</Text>
               <TouchableOpacity style={styles.elementViewTouch} onPress={() => {
