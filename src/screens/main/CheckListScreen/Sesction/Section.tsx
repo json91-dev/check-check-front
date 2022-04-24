@@ -13,37 +13,23 @@ interface SectionProps {
 }
 
 const Section = ({ sectionIndex, subjectId, sectionState}: SectionProps ) => {
-  // start, startActive, default, defaultActive, complete, completeActive
-  // const [sectionState, setSectionState] = useState('startActive')
-  //
-  // // const onPressSectionState = useCallback((state) => () => {
-  // //   setSectionState(sectionState)
-  // // }, [sectionState])
-  //
-  // useEffect(() => {
-  //   // setSectionState('startActive')
-  // }, [])
-
-  const setSectionState = () => {
-
-  }
 
   switch (sectionState) {
     case 'start': {
       return (
-        <StartSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
+        <StartSection sectionIndex={sectionIndex}  subjectId={subjectId} />
       )
     }
 
     case 'default': {
       return (
-        <DefaultSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
+        <DefaultSection sectionIndex={sectionIndex}  subjectId={subjectId} />
       )
     }
 
     case 'complete': {
       return (
-        <CompleteSection sectionIndex={sectionIndex}  subjectId={subjectId} setSectionState={setSectionState}/>
+        <CompleteSection sectionIndex={sectionIndex}  subjectId={subjectId} />
       )
     }
 

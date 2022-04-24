@@ -5,18 +5,19 @@ import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 import {useQuery} from "react-query";
 import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
+import useSectionState from "~/contexts/SectionStateContext/useSectionState";
 
 interface SectionProps {
-  setSectionState: Function,
   sectionIndex: number,
   subjectId: number
 }
 
-const StartSection = React.memo(({setSectionState, sectionIndex, subjectId}: SectionProps) => {
+const StartSection = React.memo(({ sectionIndex, subjectId}: SectionProps) => {
   const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkList: CheckListInterface = data;
   const checkListSections = checkList.checkListSections
   const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
+  const {setSectionState} = useSectionState();
 
   return (
     <Animated.View style={[styles.container]}>
@@ -25,7 +26,7 @@ const StartSection = React.memo(({setSectionState, sectionIndex, subjectId}: Sec
         <Text style={styles.leftViewTextBottom}>체크리스트 {checkListElements.length}개</Text>
       </View>
 
-      <TouchableOpacity style={styles.touch} onPress={setSectionState('startActive')}>
+      <TouchableOpacity style={styles.touch} onPress={() => setSectionState('startActive', sectionIndex)}>
         <Text style={styles.touchText}>시작하기</Text>
       </TouchableOpacity>
 

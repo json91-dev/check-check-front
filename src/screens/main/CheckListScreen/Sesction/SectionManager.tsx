@@ -6,20 +6,22 @@ import {useQuery} from "react-query";
 import {defaultQueryOptions} from "@query/options";
 import {getStorageUser} from "@utils/hooks/useStorageUser";
 import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
+import useSectionState from "~/contexts/SectionStateContext/useSectionState";
 
 const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
   const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkList: CheckListInterface = data;
   const checkListSections = checkList? checkList.checkListSections: null;
-  const [sectionStates, setSectionStates] = useState([])
+  // const [sectionStates, setSectionStates] = useState([])
   const [sectionChecked, setSectionChecked] = useState([])
   const sectionStateRef: any = useRef([]);
+  const {sectionStates, setSectionStates} = useSectionState()
+  console.warn(sectionStates)
 
   useEffect(() => {
     // 초기 상태 저장
     if (checkListSections) {
       const updatedSectionStates: any = []
-      console.log(checkListSections)
       checkListSections.forEach((section, num) => {
         const index = section.checkListElements.findIndex(item => !item.checked)
         if (index > -1) {
@@ -33,8 +35,6 @@ const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
           updatedSectionStates.push('complete')
         }
       })
-
-      console.log(updatedSectionStates)
       setSectionStates(updatedSectionStates)
     } else {
 

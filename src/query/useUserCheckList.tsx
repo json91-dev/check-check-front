@@ -87,8 +87,8 @@ export const useUserCheckPost = (subjectId: number) => {
       const checkList: any = queryClient.getQueryData([`checklist`, {subjectId}])
 
       const updatedCheckList = {...checkList}
-      updatedCheckList.checkListSections.forEach((checkListSection) => {
-        checkListSection.checkListElements.forEach(checkListElement => {
+      updatedCheckList.checkListSections.forEach((checkListSection: any) => {
+        checkListSection.checkListElements.forEach((checkListElement: any) => {
             if (checkListElement.id === elementId) {
               checkListElement.checked = !checkListElement.checked
             }

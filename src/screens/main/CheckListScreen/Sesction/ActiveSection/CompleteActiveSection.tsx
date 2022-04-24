@@ -9,6 +9,7 @@ import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 import {useQuery} from "react-query";
 import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
+import useSectionState from "~/contexts/SectionStateContext/useSectionState";
 
 interface SectionProps {
   sectionIndex: number,
