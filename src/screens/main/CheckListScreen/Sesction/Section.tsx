@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React from 'react';
 import StartSection from "@screens/main/CheckListScreen/Sesction/Section/StartSection";
 import StartActiveSection from "@screens/main/CheckListScreen/Sesction/ActiveSection/StartActiveSection";
 import DefaultSection from "@screens/main/CheckListScreen/Sesction/Section/DefaultSection";
@@ -13,7 +13,6 @@ interface SectionProps {
 }
 
 const Section = ({ sectionIndex, subjectId, sectionState}: SectionProps ) => {
-
   switch (sectionState) {
     case 'start': {
       return (
@@ -55,8 +54,6 @@ const Section = ({ sectionIndex, subjectId, sectionState}: SectionProps ) => {
       return null;
     }
   }
-
-
 }
 
 

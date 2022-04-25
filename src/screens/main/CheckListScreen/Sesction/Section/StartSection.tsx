@@ -1,6 +1,6 @@
 import {Animated, Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 import {useQuery} from "react-query";
 import {getUserCheckListBySubjectId} from "@query/useUserCheckList";

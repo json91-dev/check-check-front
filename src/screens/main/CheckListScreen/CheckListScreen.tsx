@@ -1,12 +1,9 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {ActivityIndicator, Animated, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {useCheckList} from "@query/useCheckList";
+import React, {useEffect, useRef, useState} from 'react'
+import {Image, ScrollView,  Text, TouchableOpacity, View} from "react-native";
 import Loading from "@components/Loading/Loading"
-import CheckBox from "@react-native-community/checkbox";
 import styles from './Styles';
-import Section from "./Sesction/Section";
 import HelpModal from "@components/HelpModal/HelpModal";
-import {getUserCheckListBySubjectId, useUserCheckList} from "@query/useUserCheckList";
+import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
 import SectionManager from "@screens/main/CheckListScreen/Sesction/SectionManager";
 import {useQuery} from "react-query";
@@ -20,8 +17,6 @@ interface CheckListScreenProps {
 }
 
 const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
-  const [showModal, setShowModal] = useState(true)
-
   let subjectId: number;
   if (route.params.subjectId) {
     subjectId = route.params.subjectId
@@ -52,7 +47,7 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.topNavigation}>
-        <TouchableOpacity style={styles.topNavigationTouch}>
+        <TouchableOpacity style={styles.topNavigationTouch} onPress={() => {navigation.goBack()}}>
           <Image style={styles.topNavigationImg} source={require('@assets/left-arrow.png')} />
         </TouchableOpacity>
 
@@ -72,11 +67,10 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
           <Text style={styles.titleText}>{subTitle}</Text>
         </View>
 
-        <SectionManager subjectId={subjectId} setShowModal={setShowModal}/>
+        <SectionManager subjectId={subjectId} />
       </ScrollView>
 
       <HelpModal />
-
     </View>
   )
 };

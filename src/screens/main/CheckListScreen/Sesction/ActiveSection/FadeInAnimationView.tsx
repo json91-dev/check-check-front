@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Animated, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Animated} from "react-native";
 
 interface FadeInAnimationProps {
   children: any,

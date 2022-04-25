@@ -38,7 +38,6 @@ const StartActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) 
     }
   })
 
-
   return (
     <FadeInAnimationView containerStyle={styles.container}>
       <View style={styles.leftView}>
