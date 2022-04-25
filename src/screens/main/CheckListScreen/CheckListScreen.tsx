@@ -35,10 +35,8 @@ const CheckListScreen = ({ navigation, route }: CheckListScreenProps) => {
   const isLoading = isFetching;
   const subTitle = checkList? checkList.subTitle: null;
   const imageUrl = checkList? checkList.imageUrl: null;
-
   const [count, setCount] = useState(0);
   const countInterval = useRef<NodeJS.Timer | null>(null);
-  const [checkBoxValues, setCheckBoxValues] = useState([false, false, false, false])
 
   useEffect(() => {
     if (count >= 100) {

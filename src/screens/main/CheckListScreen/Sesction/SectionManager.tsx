@@ -16,7 +16,6 @@ const SectionManager = React.memo(({subjectId, setShowModal}: any) => {
   const [sectionChecked, setSectionChecked] = useState([])
   const sectionStateRef: any = useRef([]);
   const {sectionStates, setSectionStates} = useSectionState()
-  console.warn(sectionStates)
 
   useEffect(() => {
     // 초기 상태 저장

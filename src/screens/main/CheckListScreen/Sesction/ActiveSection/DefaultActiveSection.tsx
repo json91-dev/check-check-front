@@ -1,6 +1,6 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import styles from "./Styles";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import CheckBox from "@react-native-community/checkbox";
 import SubElement from "@screens/main/CheckListScreen/Sesction/SubElement/SubElement";
 import FadeInAnimationView from "@screens/main/CheckListScreen/Sesction/ActiveSection/FadeInAnimationView";
@@ -9,6 +9,7 @@ import useHelpModal from "~/contexts/HelpModalContext/useHelpModal";
 import {useQuery} from "react-query";
 import {getUserCheckListBySubjectId, useUserCheckPost} from "@query/useUserCheckList";
 import {defaultQueryOptions} from "@query/options";
+import useSectionState from "~/contexts/SectionStateContext/useSectionState";
 
 interface SectionProps {
   sectionIndex: number,
@@ -18,17 +19,25 @@ interface SectionProps {
 const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps) => {
   const { data } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const { userCheckMutation } = useUserCheckPost(subjectId);
-  const checkList: CheckListInterface = data;
-  const checkListSections = checkList.checkListSections
-  const {sectionTitle, checkListElements} = checkListSections[sectionIndex]
+  const { sectionTitle, checkListElements } = data.checkListSections[sectionIndex]
   const { setHelpModal, openHelpModal } = useHelpModal()
+  const { setSectionState } = useSectionState()
 
-  const onChangeCheck = useCallback( (id: any, checked: any) => {
+  /** 체크박스의 Check를 변경시 mutation 호출 **/
+  const onChangeCheck = (id: any, checked: any) => {
     userCheckMutation.mutate({
       id,
       checked
     })
-  }, [])
+  }
+
+  /** 모두 체크가 되었다면 Active로 전환 **/
+  useEffect(() => {
+    const index = checkListElements.findIndex((item: any) => item.checked === false)
+    if (index === -1) {
+      setSectionState('complete', sectionIndex);
+    }
+  })
 
   return (
     <FadeInAnimationView containerStyle={{...styles.container, borderColor: '#BABBBA'}}>
@@ -37,7 +46,7 @@ const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps
         <Text style={styles.leftViewTextTop}>{sectionTitle}</Text>
       </View>
 
-      {checkListElements.map(checkListElement => {
+      {checkListElements.map((checkListElement: any) => {
         const {elementTitle, subElements, id, checked} = checkListElement
         return (
           <View key={id + elementTitle} style={{width: '100%'}}>
@@ -59,7 +68,7 @@ const DefaultActiveSection = React.memo(({sectionIndex, subjectId}: SectionProps
             </View>
 
             <View style={styles.subElementRowView}>
-              {subElements.map(subElement => {
+              {subElements.map((subElement: any) => {
                 const {id, subElementTitle} = subElement
                 return (
                   <SubElement key={id + subElementTitle} subElement={subElement}/>

@@ -77,12 +77,11 @@ export const useCheckListSubject = () => {
  */
 export const useUserCheckPost = (subjectId: number) => {
   const queryClient = useQueryClient()
-  // @ts-ignore
+
   const userCheckMutation = useMutation((checkedData) => postUserCheckList(checkedData), {
     onMutate: async (checkedData: any) => {
       const elementId = checkedData.id;
 
-      // 기존 checklist에 대한 query를 가져옴
       await queryClient.cancelQueries([`checklist`, {subjectId}])
       const checkList: any = queryClient.getQueryData([`checklist`, {subjectId}])
 
@@ -95,11 +94,9 @@ export const useUserCheckPost = (subjectId: number) => {
         })
       })
 
-      // TODO: 현재 체크된 Element의 체크값만 바꿔서 갱신한다.
       await queryClient.setQueryData([`checklist`, {subjectId}], updatedCheckList);
 
       return {
-        // checkList,
         subjectId,
       }
     },
@@ -107,9 +104,10 @@ export const useUserCheckPost = (subjectId: number) => {
     onError: (error, data, { prevCheckList}: any) => {
       // queryClient.setQueryData([`checklist`, {subjectId}], prevCheckList);
     },
-    // onSuccess: (error, data, context) => {
-    //   // queryClient.invalidateQueries([`checklist`, {subjectId}]);
-    // },
+
+    onSuccess: (error, data, context) => {
+      // queryClient.invalidateQueries([`checklist`, {subjectId}]);
+    },
   })
 
   return { userCheckMutation }

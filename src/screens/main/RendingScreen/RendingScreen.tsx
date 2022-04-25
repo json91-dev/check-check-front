@@ -32,7 +32,6 @@ const RendingScreen = ({ navigation }: {navigation: any}) => {
     }
 
     updateToken().catch(error => {
-      console.warn(error)
     })
   }, [])
 
