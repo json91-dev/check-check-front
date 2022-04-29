@@ -3,7 +3,7 @@ import {SafeAreaView, Text, View, TouchableOpacity, Image, FlatList } from 'reac
 import styles from "./Styles";
 // @ts-ignore
 import IconButton from "@components/IconButton/IconButton";
-import {getAccessTokenApi, getStorageUser, setStorageUser} from "@utils/hooks/useStorageUser";
+import {getAccessTokenApi, getStorageUser, setStorageUser} from "@hooks/useStorageUser";
 import {useCheckListSubject} from "@query/useUserCheckList";
 
 const RendingScreen = ({ navigation }: {navigation: any}) => {

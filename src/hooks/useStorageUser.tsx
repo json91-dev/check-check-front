@@ -1,6 +1,5 @@
-import AsyncStorage from "@react-native-community/async-storage";
-import {getItemFromAsync, setItemToAsync} from "@utils/hooks/useAsyncStorage";
-import {axiosInstance} from "@utils/helpers/axiosInstance";
+import {getItemFromAsync, setItemToAsync} from "@hooks/useAsyncStorage";
+import {axiosInstance} from "@utils/axiosInstance";
 
 export const getAccessTokenApi = (email: string, provider: string) => {
   return axiosInstance.post('/oauth2', {
@@ -15,7 +14,7 @@ const getStorageUser = async () => {
 };
 
 // AsyncStorage set 함수 모듈
-const setStorageUser = async (user: object) => {
+const setStorageUser = async (user: any) => {
  return await setItemToAsync('user', user)
 };
 

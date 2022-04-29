@@ -24,6 +24,7 @@ module.exports = {
           '@query': './src/query',
           '@utils': './src/utils',
           '@interfaces': './src/interfaces',
+          '@hooks': './src/hooks',
         },
       },
     ],

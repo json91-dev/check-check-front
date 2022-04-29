@@ -1,8 +1,8 @@
 
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {defaultQueryOptions} from "@query/options";
-import {axiosInstance, getJWTHeader} from "@utils/helpers/axiosInstance";
-import {getStorageUser} from "@utils/hooks/useStorageUser";
+import {axiosInstance, getJWTHeader} from "@utils/axiosInstance";
+import {getStorageUser} from "@hooks/useStorageUser";
 
 /**
  * 모든 체크리스트의 주제를 가져옴.
