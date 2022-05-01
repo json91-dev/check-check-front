@@ -22,7 +22,9 @@
         </intent-filter>
       </activity>
 
-      <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+      <activity
+              android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+              android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
@@ -30,7 +32,7 @@
 
             <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
             <data android:host="oauth"
-                  android:scheme="f2b9215695ca32d7b6115ebd163b2d5b" />
+                  android:scheme="kakaof2b9215695ca32d7b6115ebd163b2d5b" />
         </intent-filter>
       </activity>
     </application>

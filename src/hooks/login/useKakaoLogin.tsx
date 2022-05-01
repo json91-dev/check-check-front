@@ -1,14 +1,31 @@
-import React from 'react';
-import {KakaoOAuthToken, login, logout} from "@react-native-seoul/kakao-login";
+import React, {useEffect} from 'react';
+import {KakaoOAuthToken, login, logout, getProfile} from "@react-native-seoul/kakao-login";
+import {setStorageUser} from "@hooks/useStorageUser";
 const useKakaoLogin = (navigation) => {
-  const onKakaoButtonPress = async () => {
-    const token: KakaoOAuthToken = await login();
-    // Alert.alert('카카오 로그인', '로그인 성공');
-    logout().then();
-    return;
+  const signInWithKakao = async () => {
+    try {
+      const token: KakaoOAuthToken = await login();
+      const profile: any = await getProfile()
+      const email = profile.email;
+      const userInfo = {
+        email,
+        provider: 'kakao'
+      }
+      await setStorageUser(userInfo)
+      navigation.replace('Main')
+      return;
+    } catch (e) {
+      console.error(e)
+    }
   };
 
-  return {onKakaoButtonPress}
+  useEffect(() => {
+    return () => {
+      logout().then();
+    }
+  },[])
+
+  return {signInWithKakao}
 };
 
 export default useKakaoLogin;

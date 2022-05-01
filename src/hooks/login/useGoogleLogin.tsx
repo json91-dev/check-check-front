@@ -44,7 +44,7 @@ const useGoogleLogin = (navigation) => {
   /**
    *
    */
-  const onGoogleButtonPress = async () => {
+  const signInWithGoogle = async () => {
     try {
       // Step 1: GoogleSignin 모듈을 통해 토큰을 얻어옴. (로그인 화면 수행)
       const { idToken } = await GoogleSignin.signIn();
@@ -58,7 +58,7 @@ const useGoogleLogin = (navigation) => {
       console.log(e);
     }
   };
-  return {onGoogleButtonPress}
+  return {signInWithGoogle}
 };
 
 export default useGoogleLogin;
