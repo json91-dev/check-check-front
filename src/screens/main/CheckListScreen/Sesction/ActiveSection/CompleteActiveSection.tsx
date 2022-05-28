@@ -33,10 +33,10 @@ const CompleteActiveSection = React.memo(({sectionIndex, subjectId}: SectionProp
 
   /** 모두 체크가 되었다면 Active로 전환 **/
   useEffect(() => {
-    // const index = checkListElements.findIndex((item: any) => item.checked === false)
-    // if (index === -1) {
-    //   setSectionState('complete', sectionIndex);
-    // }
+    const index = checkListElements.findIndex((item: any) => item.checked === false)
+    if (index === -1) {
+      setSectionState('complete', sectionIndex);
+    }
   },[data])
 
   return (

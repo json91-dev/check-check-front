@@ -1,23 +1,19 @@
-import React, {useEffect, useState, useCallback, useRef} from 'react';
+import React, {useEffect} from 'react';
 import Section from "@screens/main/CheckListScreen/Sesction/Section";
-import {getUserCheckListBySubjectId, useUserCheckList} from "@query/useUserCheckList";
-import {CheckListInterface} from "@interfaces/UserCheckListInterfaces";
+import {getUserCheckListBySubjectId} from "@query/useUserCheckList";
 import {useQuery} from "react-query";
 import {defaultQueryOptions} from "@query/options";
 import useSectionState from "~/contexts/SectionStateContext/useSectionState";
 
 const SectionManager = React.memo(({subjectId}: any) => {
-  const { data, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
-  const checkList: CheckListInterface = data;
+  const { data: checkList, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkListSections = checkList? checkList.checkListSections: null;
-  // const [sectionStates, setSectionStates] = useState([])
-  const [sectionChecked, setSectionChecked] = useState([])
-  const sectionStateRef: any = useRef([]);
   const {sectionStates, setSectionStates} = useSectionState()
 
   useEffect(() => {
     // 초기 상태 저장
     if (checkListSections) {
+      console.log(checkListSections)
       const updatedSectionStates: any = []
       checkListSections.forEach((section, num) => {
         const index = section.checkListElements.findIndex(item => !item.checked)
