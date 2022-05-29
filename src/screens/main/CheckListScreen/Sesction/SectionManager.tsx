@@ -9,20 +9,22 @@ const SectionManager = React.memo(({subjectId}: any) => {
   const { data: checkList, isFetching } = useQuery([`checklist`, {subjectId}], getUserCheckListBySubjectId(subjectId), defaultQueryOptions);
   const checkListSections = checkList? checkList.checkListSections: null;
   const {sectionStates, setSectionStates} = useSectionState()
+  console.log(checkList)
 
   useEffect(() => {
     // 초기 상태 저장
     if (checkListSections) {
       console.log(checkListSections)
       const updatedSectionStates: any = []
+
       checkListSections.forEach((section, num) => {
-        const index = section.checkListElements.findIndex(item => !item.checked)
-        if (index > -1) {
-          const index = updatedSectionStates.findIndex((item : string) => item === 'start')
-          if (index === -1) {
-            updatedSectionStates.push('start')
-          } else {
+        const hasElementsNotChecked = section.checkListElements.findIndex(item => !item.checked) > -1
+        if (hasElementsNotChecked) {
+          const hasSectionStatesStart = updatedSectionStates.findIndex((item : string) => item === 'start') > -1
+          if (hasSectionStatesStart) {
             updatedSectionStates.push('default')
+          } else {
+            updatedSectionStates.push('start')
           }
         } else {
           updatedSectionStates.push('complete')

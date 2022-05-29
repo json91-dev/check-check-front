@@ -24,9 +24,18 @@ const useSectionState = () => {
     })
   }
 
+  const getSectionState = (sectionIndex) => {
+    if (state.sectionStates[sectionIndex]) {
+      return state.sectionStates[sectionIndex]
+    } else {
+      return null;
+    }
+  }
+
   return {
     sectionStates: state.sectionStates,
     setSectionState,
+    getSectionState,
     setSectionStates
   }
 }
