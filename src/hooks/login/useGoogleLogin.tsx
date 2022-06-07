@@ -3,7 +3,7 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from "@react-native-google-signin/google-signin";
 import { setStorageUser} from "@hooks/useStorageUser";
 
-const useGoogleLogin = (navigation) => {
+const useGoogleLogin = (navigation: any) => {
   const googleAuthChangeCallback = async (user: any) => {
     try {
       if (user) {
